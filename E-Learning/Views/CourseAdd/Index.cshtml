@@ -1,0 +1,59 @@
+﻿@model IEnumerable<E_Learning.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TutorDetail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TutorId)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Clevel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Version)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Fee)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TutorId)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Edit", "Index", "TopicList") |
+        @*<a href="/TopicList/Index/@item.Id">Deta</a>
+        @Html.ActionLink("Detail", "Detail", "TopicList") |*@
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>

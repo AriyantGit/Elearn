@@ -1,0 +1,54 @@
+﻿@model IEnumerable<E_Learning.Models.StudentCourseRegistration>
+@using E_Learning.Models;
+@{
+    ViewBag.Title = "MyExam";
+}
+
+<table class="table table-hover ">
+    <tr class="alert-primary text-center">
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Cname)
+        </th>
+        <th><label>Action</label></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink((item.Course.Cname + "(" + item.Course.Clevel + ")"), "QuestionSet", new { id = item.CourseId })
+            </td>
+            <td class="text-center ">
+
+               @{ 
+                   var flag = 0;
+
+
+                foreach (var item1 in ViewData["ansr"] as List<E_Learning.Models.AnswerDetails>)
+                {
+
+                    if (item1.CourseId == item.CourseId)
+                    {
+                        flag= 1;
+                               <label> @Html.ActionLink("Result", "MarksDetail", new { controller = "Exam", id = item.CourseId },new {@class="btn btn-outline-success"}) </label>
+                        break;
+                    }
+                    
+
+                }
+                if (flag == 0)
+                {
+                     @Html.ActionLink("Exam Start", "Index", new { controller = "Exam", id = item.CourseId },new {@class="btn btn-outline-danger"})
+                }
+             }
+            </td>
+
+
+
+
+
+            
+        </tr>
+    }
+
+</table>

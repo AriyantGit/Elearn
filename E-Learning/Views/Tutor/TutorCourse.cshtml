@@ -1,0 +1,75 @@
+﻿@model IEnumerable<E_Learning.Models.Course>
+
+@{
+    ViewBag.Title = "TutorCourse";
+}
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+<h2>TutorCourse</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fee)
+        </th>
+        <th>
+            total student
+           
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Cname)@Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fee)
+        </td>
+        <td>
+            <label>
+                
+                <div id="@item.Id">
+                    <script>
+
+                        $(document).ready(function () {
+
+                            $('#@item.Id').load("/Tutor/TotalStudent/@item.Id");
+
+
+                        });
+
+                    </script>
+                </div>
+
+            </label>
+        </td>
+        <td>
+            @*@Html.ActionLink("Details", "CourseDetails", new { id = item.Id })*@
+            @using (Html.BeginForm("CourseDetails", "Tutor", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="submit" value="Details" class="btn btn-warning"/>
+            }
+        </td>
+    </tr>
+}
+
+</table>

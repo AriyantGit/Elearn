@@ -1,0 +1,67 @@
+﻿@model IEnumerable<E_Learning.Models.QuestionSet>
+@{ 
+    Layout = null;
+}
+    <p>
+        @*@Html.DisplayFor(modelItem => modelItem.QuestionDescription)*@
+        //show course name
+    </p>
+<table class="table ">
+    <tr class="table-warning">
+        
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionDescription)
+        </th>
+        <th>
+            <label>Correct Answer</label>
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Mark)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.QuestionDescription)
+    </td>
+    @{
+        var a = item.CorrectAnswer;
+        switch (a)
+        {
+            case 1:
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option1)
+                </td>
+                break;
+            case 2:
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option2)
+                </td>
+                break;
+            case 3:
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option3)
+                </td>
+                break;
+            case 4:
+                <td>
+                    @Html.DisplayFor(modelItem => item.Option4)
+            </td>
+                break;
+            
+        }
+
+    }
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Mark)
+    </td>
+    
+    
+</tr>
+}
+
+</table>

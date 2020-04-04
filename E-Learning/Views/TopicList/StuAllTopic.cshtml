@@ -1,0 +1,81 @@
+﻿@model IEnumerable<E_Learning.Models.TopicList>
+
+@{
+    ViewBag.Title = ViewBag.courseNameLevel;
+
+}
+
+<h2>@ViewBag.courseNameLevel</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered " style="">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PdfContent)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopicName)
+            </td>
+            <td style="width: 15%; white-space:nowrap; overflow:auto; table-layout:fixed">
+
+                @Html.DisplayFor(modelItem => item.Description)
+
+            </td>
+            <td width="450px">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls muted disablePictureInPicture controlsList="nodownload">
+                        <source src="@Url.Content(item.VideoPath)" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </td>
+            <td>
+                @{
+                    var base64 = Convert.ToBase64String(item.PdfContent);
+                    var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                    <a href="@imgSrc" download="">Download File</a>
+                }
+
+
+                @*@Html.DisplayFor(modelItem => item.PdfContent)*@
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+
+    table {
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+        table td {
+            border: solid 1px #fab;
+            width: 150px;
+            word-wrap: break-word;
+        }
+</style>

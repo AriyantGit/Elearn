@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+    <link href="~/Content/Custome CSS/HovarEffect.css" rel="stylesheet" />
+<h2>Index</h2>
+<table class="table table-borderless table-hover table-responsive-md">
+    
+    <tbody>
+        <tr>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar1.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2 style="color:orange;">Add Courses</h2>
+                            <p>
+                                @*<a href="/CourseAdd" >Create new</a>*@
+                                @Html.ActionLink("Create New", "Create", "CourseAdd")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2 style="color:orange;">Add Topic</h2>
+                            <p>
+                                @*<a href="/CourseAdd" >Create new</a>*@
+                                @Html.ActionLink("AddTopic", "Index", "TopicList")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2 style="color:orange;">Add Question Topic</h2>
+                            <p>
+                                @*<a href="/CourseAdd" >Create new</a>*@
+                                @Html.ActionLink("AddTopic", "Index", "TopicList",  new {addquestion = "1"},null)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2 style="color:orange;">Effect </h2>
+                            <p>
+                                @Html.ActionLink("My course", "TutorCourse", "Tutor", new { id = "1" }, null)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/mycourses.jpg" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2 class="alert-success">My</h2>
+                            <p>
+                                <a href="#">LINK HERE</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2>Effect 12</h2>
+                            <p>
+                                <a href="#">LINK HERE</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card" style="width: 18rem;">
+                    <div class="hovereffect">
+                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
+                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
+                        <div class="overlay">
+                            <h2>Effect 12</h2>
+                            <p>
+                                <a href="#">LINK HERE</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+
+    </tbody>
+</table>
+

@@ -1,0 +1,189 @@
+﻿@model E_Learning.Models.TopicList
+
+@{
+    ViewBag.Title = "Create";
+}
+
+    <h2>@ViewBag.courseNameLevel</h2>
+
+@using (Html.BeginForm("create","TopicList",FormMethod.Post, new {@id = "myForm", @name = "myForm", enctype = "multipart/form-data"}))  
+{
+    @Html.AntiForgeryToken()
+
+
+    //html video confirm modal
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <h4>TopicList</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TopicName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TopicName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TopicName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control required", @cols = 40, @rows = 10 })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VideoPath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<div class="custom-file mb-3">
+
+                    <label class="custom-file-label" id="videolebel" for="customFile"><i class="far fa-file-video text-danger ">Choose file</i></label>
+                </div>*@
+                <input type="file" class="" id="customFile" name="customFile"  accept="video/*">
+                <video width="400" id="videoPreview" controls style="display:none">
+                    <source src="" id="video_here">
+                    Your browser does not support HTML5 video.
+                </video>
+
+                @*<input type="file" name="file[]" class="file_multi_video" accept="video/*" />*@
+                @Html.ValidationMessageFor(model => model.VideoPath, "", new { @class = "text-danger" })
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PdfContent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<div class="custom-file mb-3">
+
+                    <label class="custom-file-label" for="pdffile" id="pdflebel">Choose file</label>
+                </div>*@
+                <input type="file" class="" id="pdffile" name="pdffile">
+                @Html.ValidationMessageFor(model => model.PdfContent, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="btnsubmit" data-toggle="modal"  />
+                @*<button value="Click" type="button" data-toggle="modal" data-target="#myModal"></button>*@
+                <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(document).ready(function () {
+
+
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+            //Video Tag
+           // $(document).on("change", ".file_multi_video", function (evt) {
+            
+            $("#customFile").change(function () {
+
+                var validExtensions = ["MP4","mp4"]//"jpeg","gif","png"]//
+                var file = $(this).val().split('.').pop();
+                if (validExtensions.indexOf(file) == -1) {
+                    alert("Only formats are allowed : " + validExtensions.join(', '));
+                   $("#customFile").val('');// = "";
+                    $('#videoPreview').trigger('pause');
+                    $('#videoPreview').removeAttr('src');
+                    $("#videoPreview").hide(700);
+                }
+                else {
+                     alert($("#customFile").val());
+                        if ($("#customFile").val() != "") {
+                            var $source = $('#video_here');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $("#videoPreview").show(700);
+                        }
+                        else {
+                            $('#videoPreview').trigger('pause');
+                            $('#videoPreview').removeAttr('src');
+                            $("#videoPreview").hide(700);
+                            // var vid = document.getElementById("videoPreview").src;
+                            //alert("sourc"+vid);
+
+                        }
+                     }
+
+               
+               
+            });
+
+           $("#pdffile").change(function () {
+                var validExtensions = ["pdf","PDF"]//"jpeg","gif","png"]//
+                var file = $(this).val().split('.').pop();
+                if (validExtensions.indexOf(file) == -1) {
+                    alert("Only formats are allowed : " + validExtensions.join(', '));
+                    $("#pdffile").val('');
+                    
+                }
+                
+               
+           });
+
+           
+
+
+
+            //$("#myForm").submit(function () {
+                $("#btnsubmit").click(function () {
+
+               // });
+                alert($("#customFile").val());
+                if ($("#customFile").val() == '') {
+                    var ansr = confirm("Without Video you want to save the topic?");
+                    alert(ansr);
+                    if (ansr) {
+                        $("#myForm").submit();
+                        //$("#myForm").submit();
+                    }
+                }
+  
+            });
+
+            $("#customFile").change(function () {
+
+    
+            });
+
+        });
+    </script>
+}

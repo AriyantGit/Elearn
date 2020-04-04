@@ -1,0 +1,98 @@
+﻿@model E_Learning.Models.QuestionSet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuestionSet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicList.TopicName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicList.TopicName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Option1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Option2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Option3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Option4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorrectAnswer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorrectAnswer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserModified)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionSetId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

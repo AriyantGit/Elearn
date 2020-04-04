@@ -1,0 +1,56 @@
+﻿@model IEnumerable<E_Learning.Models.StudentCourseRegistration>
+
+@{
+    ViewBag.Title = "CourseDetails";
+}
+
+<h2>CourseDetails</h2>
+@{
+    
+}
+<table class="table ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Cname)
+        </th>
+        <th>
+            <label>Student Name</label>
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Cname)
+            </td>
+            <td>
+                <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target=@("#" + @Html.DisplayFor(modelItem => item.Student.FName)) aria-expanded="false" aria-controls="collapseExample">
+                    @Html.DisplayFor(modelItem => item.Student.FName) &nbsp  @Html.DisplayFor(modelItem => item.Student.LName)
+                </button>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentCourseRegistrationId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentCourseRegistrationId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentCourseRegistrationId })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <div class="collapse " id=@Html.DisplayFor(modelItem => item.Student.FName)>
+                    <div class="card card-body bg-warning">
+                        @Html.DisplayFor(modelItem => item.Student.FName)
+                        @Html.DisplayFor(modelItem => item.Student.LName)
+                        @Html.DisplayFor(modelItem => item.Student.Mobile)
+                        @Html.DisplayFor(modelItem => item.Student.Email)
+                        @Html.DisplayFor(modelItem => item.Student.StudentId)
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    }
+
+</table>

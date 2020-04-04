@@ -1,0 +1,61 @@
+﻿@model E_Learning.Models.AnswerDetails
+
+@{
+    ViewBag.Title = "MarksDetail";
+}
+
+<h2>MarksDetail</h2>
+
+<div>
+
+    <hr />
+    <table class=" table table-hover">
+        <thead class="alert-danger">
+            <tr>
+                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.Course.Cname)@Html.DisplayNameFor(model => model.CourseId) </td>
+                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.MarksObtain)</td>
+                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.percentage)</td>
+                <td class="text-center font-weight-bold alert-primary"><label>Total Marks </label></td>
+
+                <td class="text-center font-weight-bold alert-primary">@Html.DisplayNameFor(model => model.TickAnsr)</td>
+                @if (Model.percentage >= 30.0)
+                {
+                    <td class="text-center font-weight-bold alert-primary"><label>Download</label></td>
+                }
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">@Html.DisplayFor(model => model.Course.Cname)@Html.DisplayFor(model => model.Course.Id)</td>
+                <td class="text-center">@Html.DisplayFor(model => model.MarksObtain)</td>
+                <td class="text-center">@Html.DisplayFor(model => model.percentage)</td>
+                <td class="text-center "><label>@ViewBag.total</label></td>
+                <td class="text-center">@Html.DisplayFor(model => model.TickAnsr)</td>
+                @if (Model.percentage >= 30.0)
+                {
+                    <td>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <div id="UserControl">
+
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-success" value=@Html.DisplayFor(model=>model.CourseId) id="showAnswer">Show Answer</button>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+   $(document).ready (function(){
+       $("#showAnswer").click(function () {
+           var a = $("#showAnswer").val();
+        $('#UserControl').load("/Question/AnsrDetails/"+$("#showAnswer").val());
+        
+    });
+});
+</script>

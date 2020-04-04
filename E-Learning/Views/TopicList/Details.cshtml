@@ -1,0 +1,68 @@
+﻿@model E_Learning.Models.TopicList
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TopicList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Cname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Cname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopicName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoPath)
+        </dt>
+
+        <dd>
+            <div class="embed-responsive embed-responsive-16by9">
+               
+                <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls  disablePictureInPicture controlsList="nodownload">
+        <source src="@Url.Content( Model.VideoPath)" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PdfContent)
+        </dt>
+
+        <dd>
+            @{
+                var base64 = Convert.ToBase64String(Model.PdfContent);
+                var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                <a href="@imgSrc" download="">Download File</a>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,72 @@
+﻿@model E_Learning.Models.Course
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Registration</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    {
+
+        <div>
+            <h4>Course</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.TutorDetail.Fname)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TutorDetail.Fname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Cname)
+                    
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Clevel)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Clevel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Version)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Version)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Fee)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Fee)
+                </dd>
+
+            </dl>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    }
+}
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

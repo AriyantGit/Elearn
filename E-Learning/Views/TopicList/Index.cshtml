@@ -1,0 +1,129 @@
+﻿@model E_Learning.Models.Course
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*@using (Html.BeginForm("Index", ViewBag.addquestion:"TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))*@
+   
+
+
+    @*@if (ViewBag.addquestion == null)
+    {
+        @using (Html.BeginForm("Index", "TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
+}
+else
+{
+    @using (Html.BeginForm("Index", "TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
+}*@
+@using (Html.BeginForm("Index", (ViewBag.addquestion==null?"Topiclist":"Question"), FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Course</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Cname, new SelectList(ViewBag.droplist, "cname", "cname"), "--Please Select Doctor Type--", new { @id = "dropdownlistcourse", @class = "form-control doctypelist" })
+                @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Clevel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Clevel, htmlAttributes: new { @class = "form-control", @id = "courselevel" })
+                @Html.ValidationMessageFor(model => model.Clevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" value="Create" class="btn btn-default" id="btnGet" onclick="dropdownvalue()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        //$("#btnGet").click(function () {
+        //    var selectedValue = $("#courselevel").val();
+        //    debugger
+        //    if (selectedValue != '') {
+        //        $('#courseselectform').submit();
+        //    }
+        //    else
+        //    alert(selectedValue);
+        //});
+        //initially no option in courselevel dropdown
+        $('#courselevel').html("<select id='cleveldropdown'><option value=''>--Select--</option></select>");
+         $("#dropdownlistcourse").change(function () {
+             var selectedItem = $(this).val();
+             //alert(selectedItem);
+                // var ddlStates = $("#StateId");
+             
+             $.ajax({
+                 cache: false,
+                 
+                 url: '@Url.Action("/GetLevel")',
+                        method: 'post',
+                        contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify({ level: selectedItem }),
+                        dataType: 'json',
+                 success: function (data) {
+                    // alert(data);
+                    var clevel = "<select id='cleveldropdown'>";
+                        clevel = clevel + '<option value="">--Select--</option>';
+                        var gfg = JSON.stringify(data[i]);
+
+                        console.log(gfg);
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        // var gfg = JSON.stringify(data[i]);
+                        var jsond=JSON.parse(JSON.stringify(data[i]));
+                        console.log(jsond.Clevel);
+
+                        switch (jsond.Clevel) {
+
+                            case 0:
+                                clevel = clevel + '<option value=' + jsond.Clevel + '>' + "Beginer" + '</option>';
+                                 break;
+                            case 1:
+                                clevel = clevel + '<option value=' + jsond.Clevel + '>' + "Ammature" + '</option>';
+                                break;
+                             case 2:
+                                clevel = clevel + '<option value=' + jsond.Clevel + '>' + "Expert" + '</option>';
+                                break;
+                             case 3:
+                                clevel = clevel + '<option value=' + jsond.Clevel + '>' + "Others" + '</option>';
+                                break;
+                        }
+
+                    }
+                    clevel = clevel + '</select>';
+                    $('#courselevel').html(clevel);
+                }    , failure: function (response) {
+                    alert(response.responseText);
+                },
+                    error: function (xhr, ajaxOptions, thrownError,data) {
+                        alert( data);
+
+
+                    }
+                });
+            });
+});
+</script>

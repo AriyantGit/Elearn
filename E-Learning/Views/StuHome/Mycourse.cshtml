@@ -1,0 +1,39 @@
+﻿@model IEnumerable<E_Learning.Models.StudentCourseRegistration>
+
+@{
+    ViewBag.Title = "Mycourse";
+}
+
+
+<table class="table">
+    <tr class="alert-primary align-baseline">
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.FName)
+        </th>
+        
+        
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.Cname)@Html.DisplayFor(modelItem => item.CourseId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.FName)
+        </td>
+       
+        
+        <td>
+            @Html.ActionLink("Details", "StuAllTopic", new { controller = "TopicList", id = item.CourseId })
+            @*@Html.ActionLink("Details", "TopicList", new { id = item.CourseId })*@
+
+        </td>
+    </tr>
+}
+
+</table>

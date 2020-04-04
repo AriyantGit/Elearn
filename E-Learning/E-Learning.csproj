@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{53B4730E-A366-4A4D-B793-7E752F476EB3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>E_Learning</RootNamespace>
+    <AssemblyName>E-Learning</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44314</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CourseAddController.cs" />
+    <Compile Include="Controllers\CourseSearchController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\StuHomeController.cs" />
+    <Compile Include="Controllers\TopicListController.cs" />
+    <Compile Include="Controllers\TutorController.cs" />
+    <Compile Include="Controllers\TutorHomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191526400_CreateTutorTable.cs" />
+    <Compile Include="Migrations\202002191526400_CreateTutorTable.designer.cs">
+      <DependentUpon>202002191526400_CreateTutorTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191840499_CreateCourseTable.cs" />
+    <Compile Include="Migrations\202002191840499_CreateCourseTable.designer.cs">
+      <DependentUpon>202002191840499_CreateCourseTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002191847387_CreateCourseTable1.cs" />
+    <Compile Include="Migrations\202002191847387_CreateCourseTable1.designer.cs">
+      <DependentUpon>202002191847387_CreateCourseTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002260654139_updatecourse.cs" />
+    <Compile Include="Migrations\202002260654139_updatecourse.designer.cs">
+      <DependentUpon>202002260654139_updatecourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002260803086_updatecourse1.cs" />
+    <Compile Include="Migrations\202002260803086_updatecourse1.designer.cs">
+      <DependentUpon>202002260803086_updatecourse1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002261258079_createTopicTable.cs" />
+    <Compile Include="Migrations\202002261258079_createTopicTable.designer.cs">
+      <DependentUpon>202002261258079_createTopicTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002271445127_topiclist.cs" />
+    <Compile Include="Migrations\202002271445127_topiclist.designer.cs">
+      <DependentUpon>202002271445127_topiclist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003161431416_foreigntopiclist.cs" />
+    <Compile Include="Migrations\202003161431416_foreigntopiclist.designer.cs">
+      <DependentUpon>202003161431416_foreigntopiclist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170315107_updateCourseForeignkey.cs" />
+    <Compile Include="Migrations\202003170315107_updateCourseForeignkey.designer.cs">
+      <DependentUpon>202003170315107_updateCourseForeignkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170359164_passwordAddTutor.cs" />
+    <Compile Include="Migrations\202003170359164_passwordAddTutor.designer.cs">
+      <DependentUpon>202003170359164_passwordAddTutor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190448545_createstudent.cs" />
+    <Compile Include="Migrations\202003190448545_createstudent.designer.cs">
+      <DependentUpon>202003190448545_createstudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190450417_createstudent1.cs" />
+    <Compile Include="Migrations\202003190450417_createstudent1.designer.cs">
+      <DependentUpon>202003190450417_createstudent1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190527281_createstudent2.cs" />
+    <Compile Include="Migrations\202003190527281_createstudent2.designer.cs">
+      <DependentUpon>202003190527281_createstudent2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190532020_createstudent3.cs" />
+    <Compile Include="Migrations\202003190532020_createstudent3.designer.cs">
+      <DependentUpon>202003190532020_createstudent3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190619400_createstudent4.cs" />
+    <Compile Include="Migrations\202003190619400_createstudent4.designer.cs">
+      <DependentUpon>202003190619400_createstudent4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003191313125_createQuestionSets.cs" />
+    <Compile Include="Migrations\202003191313125_createQuestionSets.designer.cs">
+      <DependentUpon>202003191313125_createQuestionSets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003191316577_createQuestionSets1.cs" />
+    <Compile Include="Migrations\202003191316577_createQuestionSets1.designer.cs">
+      <DependentUpon>202003191316577_createQuestionSets1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003201616435_createstudentRegistraion.cs" />
+    <Compile Include="Migrations\202003201616435_createstudentRegistraion.designer.cs">
+      <DependentUpon>202003201616435_createstudentRegistraion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003201621440_createstudentRegistraion1.cs" />
+    <Compile Include="Migrations\202003201621440_createstudentRegistraion1.designer.cs">
+      <DependentUpon>202003201621440_createstudentRegistraion1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210413127_createtutorid.cs" />
+    <Compile Include="Migrations\202003210413127_createtutorid.designer.cs">
+      <DependentUpon>202003210413127_createtutorid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210438247_createtutorid1.cs" />
+    <Compile Include="Migrations\202003210438247_createtutorid1.designer.cs">
+      <DependentUpon>202003210438247_createtutorid1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210444475_createtutorid2.cs" />
+    <Compile Include="Migrations\202003210444475_createtutorid2.designer.cs">
+      <DependentUpon>202003210444475_createtutorid2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210455561_createtutorid3.cs" />
+    <Compile Include="Migrations\202003210455561_createtutorid3.designer.cs">
+      <DependentUpon>202003210455561_createtutorid3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210606133_allownullLasttopicid.cs" />
+    <Compile Include="Migrations\202003210606133_allownullLasttopicid.designer.cs">
+      <DependentUpon>202003210606133_allownullLasttopicid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003230321467_Droptable.cs" />
+    <Compile Include="Migrations\202003230321467_Droptable.designer.cs">
+      <DependentUpon>202003230321467_Droptable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003230338330_CreateRegStu.cs" />
+    <Compile Include="Migrations\202003230338330_CreateRegStu.designer.cs">
+      <DependentUpon>202003230338330_CreateRegStu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003230608051_updatequesCourseId.cs" />
+    <Compile Include="Migrations\202003230608051_updatequesCourseId.designer.cs">
+      <DependentUpon>202003230608051_updatequesCourseId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003230612122_updatequesCourseId1.cs" />
+    <Compile Include="Migrations\202003230612122_updatequesCourseId1.designer.cs">
+      <DependentUpon>202003230612122_updatequesCourseId1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003300654444_AddAnsrTable.cs" />
+    <Compile Include="Migrations\202003300654444_AddAnsrTable.designer.cs">
+      <DependentUpon>202003300654444_AddAnsrTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004041520212_updatetutortable.cs" />
+    <Compile Include="Migrations\202004041520212_updatetutortable.designer.cs">
+      <DependentUpon>202004041520212_updatetutortable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AnswerDetails.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\DAL\AllRepository.cs" />
+    <Compile Include="Models\DAL\IMyAsyncDbSet.cs" />
+    <Compile Include="Models\DAL\_IAllRepository.cs" />
+    <Compile Include="Models\DbModel.cs" />
+    <Compile Include="Models\QuestionSet.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentCourseRegistration.cs" />
+    <Compile Include="Models\TopicList.cs" />
+    <Compile Include="Models\TutorDetails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custome CSS\dropdownhovar.css" />
+    <Content Include="Content\Custome CSS\Font.css" />
+    <Content Include="Content\Custome CSS\HovarEffect.css" />
+    <Content Include="Content\Custome CSS\style4.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Image\img_avatar1.png" />
+    <Content Include="Image\img_avatar3.png" />
+    <Content Include="Image\mycourses.jpg" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\CustomeJS\CoursePaid.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Content\Custome CSS\custome.css" />
+    <Content Include="Content\Custome CSS\custome.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Tutor\Index.cshtml" />
+    <Content Include="Views\Tutor\Create.cshtml" />
+    <Content Include="Views\Tutor\Edit.cshtml" />
+    <Content Include="Views\TutorHome\Index.cshtml" />
+    <Content Include="Views\CourseAdd\Create.cshtml" />
+    <Content Include="Views\CourseAdd\Index.cshtml" />
+    <Content Include="Views\TopicList\Index.cshtml" />
+    <Content Include="Views\TopicList\AllTopic.cshtml" />
+    <Content Include="Views\TopicList\Create.cshtml" />
+    <Content Include="Views\TopicList\TopicList.cshtml" />
+    <Content Include="Views\TopicList\Details.cshtml" />
+    <Content Include="Views\Login\TutorLogin.cshtml" />
+    <Content Include="Views\Stu\Index.cshtml" />
+    <Content Include="Views\Stu\Create.cshtml" />
+    <Content Include="Views\Stu\Edit.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Question\Create.cshtml" />
+    <Content Include="Views\Question\Delete.cshtml" />
+    <Content Include="Views\Question\Details.cshtml" />
+    <Content Include="Views\Question\Edit.cshtml" />
+    <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\StuHome\Index.cshtml" />
+    <Content Include="Views\StuHome\SearchCourse.cshtml" />
+    <Content Include="Views\StuHome\Registration.cshtml" />
+    <Content Include="Views\StuHome\ListCourse.cshtml" />
+    <Content Include="Views\CourseSearch\Create.cshtml" />
+    <Content Include="Views\CourseSearch\Delete.cshtml" />
+    <Content Include="Views\CourseSearch\Details.cshtml" />
+    <Content Include="Views\CourseSearch\Edit.cshtml" />
+    <Content Include="Views\CourseSearch\Index.cshtml" />
+    <Content Include="Views\StuHome\Mycourse.cshtml" />
+    <Content Include="Views\StuHome\MyExam.cshtml" />
+    <Content Include="Views\StuHome\QuestionSet.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\MarksDetail.cshtml" />
+    <Content Include="Views\TopicList\StuAllTopic.cshtml" />
+    <Content Include="Views\Question\AnsrDetails.cshtml" />
+    <Content Include="Views\Tutor\TutorCourse.cshtml" />
+    <Content Include="Views\Tutor\CourseDetails.cshtml" />
+    <Content Include="Views\Tutor\Details.cshtml" />
+    <Content Include="Views\Tutor\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002191526400_CreateTutorTable.resx">
+      <DependentUpon>202002191526400_CreateTutorTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191840499_CreateCourseTable.resx">
+      <DependentUpon>202002191840499_CreateCourseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002191847387_CreateCourseTable1.resx">
+      <DependentUpon>202002191847387_CreateCourseTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002260654139_updatecourse.resx">
+      <DependentUpon>202002260654139_updatecourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002260803086_updatecourse1.resx">
+      <DependentUpon>202002260803086_updatecourse1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002261258079_createTopicTable.resx">
+      <DependentUpon>202002261258079_createTopicTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002271445127_topiclist.resx">
+      <DependentUpon>202002271445127_topiclist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161431416_foreigntopiclist.resx">
+      <DependentUpon>202003161431416_foreigntopiclist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170315107_updateCourseForeignkey.resx">
+      <DependentUpon>202003170315107_updateCourseForeignkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170359164_passwordAddTutor.resx">
+      <DependentUpon>202003170359164_passwordAddTutor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190448545_createstudent.resx">
+      <DependentUpon>202003190448545_createstudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190450417_createstudent1.resx">
+      <DependentUpon>202003190450417_createstudent1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190527281_createstudent2.resx">
+      <DependentUpon>202003190527281_createstudent2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190532020_createstudent3.resx">
+      <DependentUpon>202003190532020_createstudent3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190619400_createstudent4.resx">
+      <DependentUpon>202003190619400_createstudent4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003191313125_createQuestionSets.resx">
+      <DependentUpon>202003191313125_createQuestionSets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003191316577_createQuestionSets1.resx">
+      <DependentUpon>202003191316577_createQuestionSets1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003201616435_createstudentRegistraion.resx">
+      <DependentUpon>202003201616435_createstudentRegistraion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003201621440_createstudentRegistraion1.resx">
+      <DependentUpon>202003201621440_createstudentRegistraion1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210413127_createtutorid.resx">
+      <DependentUpon>202003210413127_createtutorid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210438247_createtutorid1.resx">
+      <DependentUpon>202003210438247_createtutorid1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210444475_createtutorid2.resx">
+      <DependentUpon>202003210444475_createtutorid2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210455561_createtutorid3.resx">
+      <DependentUpon>202003210455561_createtutorid3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210606133_allownullLasttopicid.resx">
+      <DependentUpon>202003210606133_allownullLasttopicid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003230321467_Droptable.resx">
+      <DependentUpon>202003230321467_Droptable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003230338330_CreateRegStu.resx">
+      <DependentUpon>202003230338330_CreateRegStu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003230608051_updatequesCourseId.resx">
+      <DependentUpon>202003230608051_updatequesCourseId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003230612122_updatequesCourseId1.resx">
+      <DependentUpon>202003230612122_updatequesCourseId1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003300654444_AddAnsrTable.resx">
+      <DependentUpon>202003300654444_AddAnsrTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004041520212_updatetutortable.resx">
+      <DependentUpon>202004041520212_updatetutortable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>16156</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44314/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
