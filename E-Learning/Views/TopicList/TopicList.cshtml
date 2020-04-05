@@ -4,68 +4,116 @@
     ViewBag.Title = ViewBag.courseNameLevel;
 
 }
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+<div class="row ">
+    <div class="embed-responsive embed-responsive-16by9 col-xl-9">
 
-<h2>@ViewBag.courseNameLevel</h2>
+        <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls disablePictureInPicture controlsList="nodownload">
+            <source src="@ViewBag.videourl" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+    </div>
+    
+    <div class="col-xl-3  bg-dark"  style="overflow: auto;  max-height:530px">
+        <table class="table " style="">
+            <tr>
+                <th class="alert-danger text-center">
+                    @Html.DisplayNameFor(model => model.TopicName)
+                </th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-bordered " style="">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TopicName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VideoPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PdfContent)
-        </th>
-        <th></th>
-    </tr>
+            </tr>
 
-    @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="alert-primary">
+
+
+                        @Html.ActionLink(item.TopicName, "TopicList", new { i = item.Id }, new { @class = "border" })
+                        <span onclick="myFunction(this); " id=@item.Id onload="alert('jhj');" class="fa fa-thumbs-up"></span>
+
+                    </td>
+
+                </tr>
+
+
+            }
+
+        </table>
+    </div>
+</div>
+<div>
+    @foreach (var person in ViewBag.data)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TopicName)
-            </td>
-            <td style="width: 15%; white-space:nowrap; overflow:auto; table-layout:fixed">
-
-                @Html.DisplayFor(modelItem => item.Description)
-
-            </td>
-            <td width="450px">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls muted disablePictureInPicture controlsList="nodownload">
-                        <source src="@Url.Content(item.VideoPath)" type="video/mp4">
-                         Your browser does not support the video tag.
-                    </video>
-                </div>
-
-            </td>
-            <td>
-                @{
-                    var base64 = Convert.ToBase64String(item.PdfContent);
-                    var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
-                    <a href="@imgSrc" download="">Download File</a>
-                }
-
-
-                @*@Html.DisplayFor(modelItem => item.PdfContent)*@
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+        <script>
+            $("#@person").removeClass("fa-thumbs-up");
+            $("#@person").addClass("fa-thumbs-down");
+        </script>
+        
     }
+</div>
+        <script>
+            function myFunction(x) {
+                
+               
+                if ($(x).hasClass("fa-thumbs-up")) {
+                    //alert($(x).id);
+                     $.ajax({
+                        url: '@Url.Action("/Tlike")',
+                        method: 'post',
+                        contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify({ id: x.id }),
+                        dataType: 'json',
+                         success: function (data) {
+                             
 
-</table>
+                            
+                        }
+                        
+                     });
+                    toastr.success('You like This Post.');
+                } else{
+                    $.ajax({
+                        url: '@Url.Action("/TDislike")',
+                        method: 'post',
+                        contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify({ id: x.id }),
+                        dataType: 'json',
+                         success: function (data) {
+                             
+
+                            
+                        }
+                    });
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                   "positionClass": "toast-bottom-left",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "12000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                    toastr.error('You dislike This Post.');
+                }
+                $(x).toggleClass("fa-thumbs-down fa-thumbs-up");
+                
+                }
+            
+        </script>
 <style>
    
     table {

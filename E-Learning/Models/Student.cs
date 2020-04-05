@@ -22,6 +22,7 @@ namespace E_Learning.Models
         public string Password { get; set; }
 
         public ICollection<StudentCourseRegistration> StudentCourseRegistrations { get; set; }
+        public ICollection<TopicLike> TopicLikes { get; set; }
 
         public ICollection<AnswerDetails> AnswerDetails { get; set; }
     }

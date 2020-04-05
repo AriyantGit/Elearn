@@ -261,6 +261,22 @@
     <Compile Include="Migrations\202004041520212_updatetutortable.designer.cs">
       <DependentUpon>202004041520212_updatetutortable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004051158213_topiclike.cs" />
+    <Compile Include="Migrations\202004051158213_topiclike.designer.cs">
+      <DependentUpon>202004051158213_topiclike.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004051209206_topiclike1.cs" />
+    <Compile Include="Migrations\202004051209206_topiclike1.designer.cs">
+      <DependentUpon>202004051209206_topiclike1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004051216164_topiclike2.cs" />
+    <Compile Include="Migrations\202004051216164_topiclike2.designer.cs">
+      <DependentUpon>202004051216164_topiclike2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004051223337_topiclike3.cs" />
+    <Compile Include="Migrations\202004051223337_topiclike3.designer.cs">
+      <DependentUpon>202004051223337_topiclike3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnswerDetails.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -272,6 +288,7 @@
     <Compile Include="Models\QuestionSet.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentCourseRegistration.cs" />
+    <Compile Include="Models\TopicLike.cs" />
     <Compile Include="Models\TopicList.cs" />
     <Compile Include="Models\TutorDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -290,8 +307,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\%283%29 Hashing - YouTube.MP4" />
     <Content Include="Image\img_avatar1.png" />
     <Content Include="Image\img_avatar3.png" />
+    <Content Include="Image\lred.png" />
+    <Content Include="Image\lwhite.jpg" />
     <Content Include="Image\mycourses.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -575,6 +595,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004041520212_updatetutortable.resx">
       <DependentUpon>202004041520212_updatetutortable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051158213_topiclike.resx">
+      <DependentUpon>202004051158213_topiclike.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051209206_topiclike1.resx">
+      <DependentUpon>202004051209206_topiclike1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051216164_topiclike2.resx">
+      <DependentUpon>202004051216164_topiclike2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004051223337_topiclike3.resx">
+      <DependentUpon>202004051223337_topiclike3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

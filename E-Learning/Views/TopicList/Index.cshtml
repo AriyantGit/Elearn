@@ -3,22 +3,27 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
 
+<a class="btn btn-danger" onclick="toastr.error('Hi! I am error message.');">Error message</a>
 <h2>Index</h2>
 
 @*@using (Html.BeginForm("Index", ViewBag.addquestion:"TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))*@
-   
 
 
-    @*@if (ViewBag.addquestion == null)
+
+@*@if (ViewBag.addquestion == null)
+        {
+            @using (Html.BeginForm("Index", "TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
+    }
+    else
     {
         @using (Html.BeginForm("Index", "TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
-}
-else
-{
-    @using (Html.BeginForm("Index", "TopicList", FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
-}*@
-@using (Html.BeginForm("Index", (ViewBag.addquestion==null?"Topiclist":"Question"), FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
+    }*@
+@using (Html.BeginForm("Index", (ViewBag.addquestion == null ? "Topiclist" : "Question"), FormMethod.Post, htmlAttributes: new { @id = "courseselectform" }))
 {
     @Html.AntiForgeryToken()
 
@@ -74,10 +79,10 @@ else
              var selectedItem = $(this).val();
              //alert(selectedItem);
                 // var ddlStates = $("#StateId");
-             
+
              $.ajax({
                  cache: false,
-                 
+
                  url: '@Url.Action("/GetLevel")',
                         method: 'post',
                         contentType: 'application/json;charset=utf-8',

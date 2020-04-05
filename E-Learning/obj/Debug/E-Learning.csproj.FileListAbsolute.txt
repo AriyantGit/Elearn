@@ -111,3 +111,7 @@ D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.updat
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.updatequesCourseId1.resources
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.AddAnsrTable.resources
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.updatetutortable.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike1.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike2.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike3.resources

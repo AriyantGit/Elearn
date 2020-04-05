@@ -22,6 +22,9 @@ namespace E_Learning.Models
         public byte[] PdfContent { get; set; }
         //public ICollection<QuestionSet> questionSets { get; set; }
         public ICollection<StudentCourseRegistration> StudentCourseRegistrations { get; set; }
+        public ICollection<TopicLike> TopicLikes { get; set; }
+       
+        public int Views { get; set; }
 
     }
 }

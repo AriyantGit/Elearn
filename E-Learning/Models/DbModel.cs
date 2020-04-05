@@ -74,6 +74,7 @@ namespace E_Learning.Models
         public virtual DbSet<Course> Courses { get; set; }
 
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<TopicLike> TopicLikes { get; set; }
         public virtual DbSet<StudentCourseRegistration> StudentCourseRegistrations { get; set; }
 
         public System.Data.Entity.DbSet<E_Learning.Models.TopicList> TopicLists { get; set; }

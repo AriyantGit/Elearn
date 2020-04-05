@@ -13,12 +13,14 @@ namespace E_Learning.Controllers
     {
         _IAllRepository<TopicList> obj;
         _IAllRepository<Course> courseobj;
+        _IAllRepository<TopicLike> tlikeeobj;
         DbModel db;
         public TopicListController()
         {
             this.db = new DbModel();
             this.obj = new AllRepository<TopicList>();
             this.courseobj = new AllRepository<Course>();
+            this.tlikeeobj = new AllRepository<TopicLike>();
         }
 
         // GET: TopicList
@@ -55,13 +57,64 @@ namespace E_Learning.Controllers
             Session["CourseName"] = coursedetails.Cname + "(" + coursedetails.Clevel + ")";
             return RedirectToAction("TopicList", "TopicList");
         }
-        public ActionResult TopicList()
+        public int TLikecheck(int id)
         {
+            var a=tlikeeobj.GetAll().Where(x => x.TopicId==id && x.StudentId==1).ToList();
+            if (a == null)
+            {
+                id = 1;
+                ViewBag.like = 1;
+            }
+                
+            else
+            {
+                id = 0;
+                ViewBag.like = 0;
+            }
+                
+            return id;
+        }
+        public void Tlike(int id)
+        {
+            var b = id;
+            
+            var a = new TopicLike();
+            a.StudentId = 1;
+            a.TopicId = id;
+            tlikeeobj.InsertModel(a);
+            tlikeeobj.Save();
+        }
+        public void TDislike(int id)
+        {
+            var b = id;
+            var a = new TopicLike();
+           var ba = tlikeeobj.GetAll().Where(x => x.TopicId == id && x.StudentId == 1).FirstOrDefault();
 
+            tlikeeobj.DeleteModel(ba.Id);
+            tlikeeobj.Save();
+        }
+        public ActionResult TopicList(int? i)
+        {
+            ViewBag.data = tlikeeobj.GetAll().Where(x=> x.StudentId == 1).Select(x=>x.TopicId).ToList();
+           
+            ViewBag.courseNameLevel = Session["CourseName"];
+            //obj.GetAll().Where(x => x.TopicLike.).Select(x => x.VideoPath).FirstOrDefault();
+            //int id = Convert.ToInt32(Session["Courseid"]);
+            int id = 1;
+            if (i==null)
+            {
+                ViewBag.videourl = obj.GetAll().Where(x => x.CourseId == 1).Select(x => x.VideoPath).FirstOrDefault();
+            }
+            else
+            {
+                ViewBag.videourl = obj.GetAll().Where(x => x.Id == i).Select(x => x.VideoPath).FirstOrDefault();
+            }
+            
             // var lists = courseobj.GetAll().GroupBy(x => x.Cname).Select(x => x.FirstOrDefault());
             //ViewBag.droplist = lists;
-            ViewBag.courseNameLevel = Session["CourseName"];
-            int id = Convert.ToInt32(Session["Courseid"]);
+           
+            //ViewBag.videourl = @"/Uploads/ASP.NET MVC Web Development - Udemy.mp4";
+                //@"/Image/(3)%20Hashing%20-%20YouTube.MP4";
             return View(obj.GetAll().Where(x => x.CourseId == id).ToList());
         }
         public ActionResult AllTopic()
@@ -110,7 +163,8 @@ namespace E_Learning.Controllers
                 BinaryReader reader = new BinaryReader(filepdf.InputStream);
                 pdfeBytes = reader.ReadBytes((int)filepdf.ContentLength);
                 ViewBag.Message = "File uploaded successfully.";
-                collection.VideoPath = "~/Uploads/" + Path.GetFileName(filevideo.FileName);
+                //remove ~ from videopath for future use
+                collection.VideoPath = "/Uploads/" + Path.GetFileName(filevideo.FileName);
                 collection.PdfContent = pdfeBytes;
                 collection.CourseId = Convert.ToInt32(Session["Courseid"]);
                 obj.InsertModel(collection);
