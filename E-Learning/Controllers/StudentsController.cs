@@ -6,11 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using E_Learning.Filter;
 using E_Learning.Models;
 using E_Learning.Models.DAL;
 
 namespace E_Learning.Controllers
 {
+    [Authorize]
+    [SessionTimeout]
     public class StudentsController : Controller
     {
         //private DbModel db = new DbModel();

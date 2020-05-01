@@ -1,0 +1,21 @@
+﻿<ul class="nav navbar-nav ml-auto m-0 p-0 arrow">
+    <li class="nav-item avatar dropdown">
+
+
+
+        <img id="userimage" src="~/Image/img_avatar3.png" class="rounded-circle z-depth-0"
+             style="height:35px;width:50px;" alt="avatar image"  data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+
+        <div class="dropdown-menu dropdown-menu-lg-right text-center dropdown-secondary "
+             aria-labelledby="navbarDropdownMenuLink-55" style="border:50px;">
+            <img src='@this.Session["image"]' height=100 width=150 class="img-thumbnail rounded " id="showimg" name="showimg" alt="Responsive image" />
+            <hr class="m-0 pt-3" />
+            <p>Welcome</p>
+            <p class="text-info">@this.Session["TutorName"]@this.Session["StudentId"]</p>
+            <a class=" btn btn-block btn-danger" href="/login/StudentLogout"> Logout</a>
+
+        </div>
+    </li>
+
+</ul>

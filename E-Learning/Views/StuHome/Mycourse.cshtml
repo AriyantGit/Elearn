@@ -4,36 +4,63 @@
     ViewBag.Title = "Mycourse";
 }
 
+<div class=" bg-warning text-capitalize  m-2 p-3 " style="border-radius:15px;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-user-graduate"></i>My Course List</h2>
+</div>
+<hr />
+<div class="container-fluid ">
 
-<table class="table">
-    <tr class="alert-primary align-baseline">
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Cname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.FName)
-        </th>
-        
-        
-        <th>Action</th>
-    </tr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Cname)@Html.DisplayFor(modelItem => item.CourseId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.FName)
-        </td>
-       
-        
-        <td>
-            @Html.ActionLink("Details", "StuAllTopic", new { controller = "TopicList", id = item.CourseId })
-            @*@Html.ActionLink("Details", "TopicList", new { id = item.CourseId })*@
+                <div class="card-body">
+                    
+                    <table class="table font-weight-bold  text-center text-capitalize">
+                        <tr class="table-head-bg-cyan align-baseline" >
+                            <th>
+                                @Html.DisplayNameFor(model => model.Course.Cname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Course.TutorDetail.Fname)
+                            </th>
 
-        </td>
-    </tr>
-}
 
-</table>
+                            <th>Action</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.Cname)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.TutorDetail.Fname)&nbsp;@Html.DisplayFor(modelItem => item.Course.TutorDetail.Lname)
+                        </td>
+
+
+                        <td>
+                            @*@Html.ActionLink("Details", "StuAllTopic", new { controller = "TopicList", id = item.CourseId })*@
+                            @*@Html.ActionLink("Details", "TopicList", new { controller = "TopicList", courseid = item.CourseId })*@
+                            @*@Html.ActionLink("Details", "TopicList", new { id = item.CourseId })*@
+                            <a class="btn btn-info hvr-bounce-in text-dark font-weight-bold" href="/TopicList/topiclist?courseid=@item.CourseId">
+                                <span>Details</span>
+                                <span><i class="fa fa-info"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+                 

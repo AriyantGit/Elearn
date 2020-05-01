@@ -47,10 +47,15 @@
         @Html.DisplayFor(modelItem => item.TutorId)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Edit", "Index", "TopicList") |
-        @*<a href="/TopicList/Index/@item.Id">Deta</a>
-        @Html.ActionLink("Detail", "Detail", "TopicList") |*@
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
+            @Html.ActionLink("Edit", "Index", "TopicList") 
+
+
+}
+    @*<a href="/TopicList/Index/@item.Id">Deta</a>
+    @Html.ActionLink("Detail", "Detail", "TopicList") |*@
         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
     </td>
 </tr>

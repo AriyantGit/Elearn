@@ -1,0 +1,52 @@
+﻿@model IEnumerable<E_Learning.Models.Coupon>
+@{
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Validity)
+        </th>
+        <th>
+           Apply
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <p id="@item.Id">
+                @Html.DisplayFor(modelItem => item.Code, new { placeholder = "copy and paste" })
+            </p>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Validity)
+        </td>
+        <td>
+          <button onclick="copyToClipboard('#@item.Id')" value="@item.Code" id="btn" class="badge badge-info btn btn-lg">Copy</button>
+        </td>
+    </tr>
+}
+
+</table>
+<script>
+  function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+</script>

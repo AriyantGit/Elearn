@@ -16,7 +16,7 @@ namespace E_Learning
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "TutorLogin", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "StudentLogin", id = UrlParameter.Optional }
             );
         }
     }

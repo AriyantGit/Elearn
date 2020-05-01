@@ -1,0 +1,45 @@
+﻿@model IEnumerable<E_Learning.Models.Course>
+@{ 
+    Layout = null;
+}
+<table class="table text-center  table-hover">
+    <tr class="text-capitalize text-center table-head-bg-success text-dark ">
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clevel)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Fee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Cname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clevel)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Fee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        
+    </tr>
+}
+
+</table>

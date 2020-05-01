@@ -1,0 +1,32 @@
+﻿@model IEnumerable<E_Learning.Models.TopicLike>
+
+<table class="table table-striped-bg-cyan table-hover text-center">
+    <tr class="fw-bold font-weight-bold">
+
+        <th>
+            @Html.DisplayNameFor(model => model.TopicList.TopicName)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.TopicList.Course.Cname)</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    <td>
+        <h6>
+            @Html.DisplayFor(modelItem => item.TopicList.TopicName)
+        </h6>
+    </td>
+    <td>
+        <h6>
+            @(Html.DisplayFor(modelItem => item.TopicList.Course.Cname) + "(" + Html.DisplayFor(modelItem => item.TopicList.Course.Clevel) + ")")
+        </h6>
+    </td>
+    <td>
+        @Html.ActionLink("Watch", "TopicList", new { @Controller="topiclist", i = item.TopicList.Id }, new { @class = "font-weight-bold fa fa-eye text-info" })
+    </td>
+</tr>
+}
+
+</table>

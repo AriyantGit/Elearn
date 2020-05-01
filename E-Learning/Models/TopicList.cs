@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace E_Learning.Models
 {
@@ -23,8 +24,9 @@ namespace E_Learning.Models
         //public ICollection<QuestionSet> questionSets { get; set; }
         public ICollection<StudentCourseRegistration> StudentCourseRegistrations { get; set; }
         public ICollection<TopicLike> TopicLikes { get; set; }
-       
-        public int Views { get; set; }
+        [DefaultValue(0)]
+       public int? Views { get; set; }
+        
 
     }
 }

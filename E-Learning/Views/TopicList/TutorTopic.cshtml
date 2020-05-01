@@ -1,0 +1,72 @@
+﻿@model IEnumerable<E_Learning.Models.TopicList>
+<script src="~/Content/toastr/toastr.min.js"></script>
+<link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "TutorTopic";
+}
+@{
+    if (ViewBag.fileuploadmessage != null)
+    {
+        <script>
+            toastr.options.positionClass = "toast-bottom-right";
+            toastr.success('@ViewBag.fileuploadmessage', { fadeAway: 5000 })
+        </script>
+    }
+}
+
+<div class=" text-center  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-book"></i>Course Name: @Session["CourseName"]</h2>
+</div>
+<hr />
+<link href="~/Content/BUttonCss/hover.css" rel="stylesheet" />
+<p class=" vivify popInLeft delay-1000 ">
+    @Html.ActionLink("Add New Topic", "Create", "Topiclist", new { @class = "btn shadow fw-bold  btn-lg la la-pencil  btn-info text-dark btn-lg text-center d-flex justify-content-center d-md-table mx-auto" })
+
+</p>
+
+<div class="card">
+   
+    <div class="card-body m-0">
+        
+        <table class="table text-center  font-weight-bold table table-striped table-striped-bg-default mt-3 text-dark vivify swoopInBottom delay-500 text-break">
+            <thead>
+                <tr class="  ">
+
+                    <th class="">
+                        @Html.DisplayNameFor(model => model.TopicName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Views)
+                    </th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td class="text-left">
+                            @Html.DisplayFor(modelItem => item.TopicName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Views)
+                        </td>
+                        <td class="">
+                            <h5>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "badge badge-pill badge-primary " })
+                                @Html.ActionLink("Details", "TutortopicDetails", new { id = item.Id }, new { @class = "badge badge-pill badge-success " })
+
+                            </h5>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+ 

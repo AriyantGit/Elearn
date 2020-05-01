@@ -4,51 +4,78 @@
     ViewBag.Title = "MyExam";
 }
 
-<table class="table table-hover ">
-    <tr class="alert-primary text-center">
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Cname)
-        </th>
-        <th><label>Action</label></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink((item.Course.Cname + "(" + item.Course.Clevel + ")"), "QuestionSet", new { id = item.CourseId })
-            </td>
-            <td class="text-center ">
-
-               @{ 
-                   var flag = 0;
+<div class=" bg-warning text-capitalize  m-2 p-3 " style="border-radius:15px;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-question-circle"></i>My Examination</h2>
+</div>
+<hr />
 
 
-                foreach (var item1 in ViewData["ansr"] as List<E_Learning.Models.AnswerDetails>)
-                {
+<div class="container-fluid ">
 
-                    if (item1.CourseId == item.CourseId)
-                    {
-                        flag= 1;
-                               <label> @Html.ActionLink("Result", "MarksDetail", new { controller = "Exam", id = item.CourseId },new {@class="btn btn-outline-success"}) </label>
-                        break;
-                    }
-                    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
 
-                }
-                if (flag == 0)
-                {
-                     @Html.ActionLink("Exam Start", "Index", new { controller = "Exam", id = item.CourseId },new {@class="btn btn-outline-danger"})
-                }
-             }
-            </td>
+                <div class="card-body">
+                    <table class="table table-hover ">
+                        <tr class="text-center" style="background:#AADAD8 ;">
+                            <th class="text-left">
+                                <label>
+                                    @Html.DisplayNameFor(model => model.Course.Cname)
+                                </label>
+                            </th>
+                            <th class="text-center"><label>Action</label></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-left">
+                                    <h5>
+                                        <span>
+                                            @(Html.DisplayFor(model => item.Course.Cname) + "(" + Html.DisplayFor(model => item.Course.Clevel) + ")")
+                                        </span>
+                                    </h5>
+
+                                </td>
+                                <td class="text-center ">
+
+                                    @{
+                                        var flag = 0;
+
+
+                                        foreach (var item1 in ViewData["ansr"] as List<E_Learning.Models.AnswerDetails>)
+                                        {
+
+                                            if (item1.CourseId == item.CourseId)
+                                            {
+                                                flag = 1;
+                                                <label> @Html.ActionLink("Result", "MarksDetail", new { controller = "Exam", id = item.CourseId }, new { @class = "btn btn-outline-success" }) </label>
+                                                break;
+                                            }
+
+
+                                        }
+                                        if (flag == 0)
+                                        {
+                                            @Html.ActionLink("Exam Start", "Index", new { controller = "Exam", id = item.CourseId }, new { @class = "btn btn-outline-danger" })
+                                        }
+                                    }
+                                    <div class="dropdown-divider"></div>
+                                </td>
 
 
 
 
 
-            
-        </tr>
-    }
 
-</table>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                </div>
+            </div>
+</div>
+    </div>
+

@@ -115,3 +115,10 @@ D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topic
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike1.resources
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike2.resources
 D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclike3.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclistupdateView.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.topiclistupdateView1.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.updatecourse2.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.addcarttable.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.createexamchkupdatetutorstudent.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.help.resources
+D:\Program Files\asp\E-Learning\E-Learning\obj\Debug\E_Learning.Migrations.UpdateStuTeacherRole.resources

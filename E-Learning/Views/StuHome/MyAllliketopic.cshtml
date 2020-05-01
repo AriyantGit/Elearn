@@ -1,0 +1,67 @@
+﻿@model IEnumerable<E_Learning.Models.TopicLike>
+
+@{
+    ViewBag.Title = "MyAllliketopic";
+}
+
+
+<div class=" bg-warning text-capitalize  m-2 p-3 " style="border-radius:15px;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-user-graduate"></i>My All like topic</h2>
+</div>
+<hr />
+<div class="container-fluid ">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <table class="table text-center text-capitalize">
+                        <tr style="background-color:burlywood" class="font-weight-bold">
+
+                            <th>
+                                <h5>
+                                    @Html.DisplayNameFor(model => model.TopicList.TopicName)
+                                </h5>
+                            </th>
+                            <th>
+                                <h5>
+                                    @Html.DisplayNameFor(model => model.TopicList.Course.Cname)
+                                </h5>
+                            </th>
+                            <th>
+                                <h5>Action</h5>
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td class="text-left">
+                                    <h6>
+                                        @Html.DisplayFor(modelItem => item.TopicList.TopicName)
+                                    </h6>
+                                </td>
+
+                                <td>
+                                    <h6>
+                                        @(Html.DisplayFor(modelItem => item.TopicList.Course.Cname) + "(" + @Html.DisplayFor(modelItem => item.TopicList.Course.Clevel) + ")")
+                                    </h6>
+                                </td>
+                                <td>
+                                    <h6>
+                                        @Html.ActionLink("Watch", "TopicList", new { @Controller = "topiclist", i = item.TopicList.Id }, new { @class = "font-weight-bold fa fa-eye text-info" })
+                                    </h6>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                 

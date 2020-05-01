@@ -4,63 +4,84 @@
     ViewBag.Title = ViewBag.courseNameLevel;
 
 }
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" integrity="sha256-xykLhwtLN4WyS7cpam2yiUOwr709tvF3N/r7+gOMxJw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-<div class="row ">
-    <div class="embed-responsive embed-responsive-16by9 col-xl-9">
 
-        <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls disablePictureInPicture controlsList="nodownload">
-            <source src="@ViewBag.videourl" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-    </div>
-    
-    <div class="col-xl-3  bg-dark"  style="overflow: auto;  max-height:530px">
-        <table class="table " style="">
-            <tr>
-                <th class="alert-danger text-center">
-                    @Html.DisplayNameFor(model => model.TopicName)
-                </th>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 
-            </tr>
+<script src="~/Content/toastr/toastr.min.js"></script>
+<link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+<script src="~/Content/Sweetalaert/sweetalert.js"></script>
+@if(ViewBag.topic==null)
 
-            @foreach (var item in Model)
-            {
+{
+    <div class="row ">
+        <div class=" embed-responsive embed-responsive-16by9 col-xl-9">
+
+            <video width="240" class="video-fluid z-depth-1 fa " style="height: auto;" controls disablePictureInPicture controlsList="nodownload">
+                <source src="@ViewBag.videourl" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+        </div>
+
+        <div class="col-xl-3  bg-dark " style="overflow: auto;  max-height:530px">
+            <table class="table table-borderless " style="">
                 <tr>
-                    <td class="alert-primary">
+                    <th class="text-dark alert-primary text-center">
+                        @Html.DisplayNameFor(model => model.TopicName)
 
-
-                        @Html.ActionLink(item.TopicName, "TopicList", new { i = item.Id }, new { @class = "border" })
-                        <span onclick="myFunction(this); " id=@item.Id onload="alert('jhj');" class="fa fa-thumbs-up"></span>
-
-                    </td>
+                    </th>
 
                 </tr>
 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="bg-dark ">
 
-            }
+                            <p class="text-white">
+                                @Html.ActionLink(item.TopicName, "TopicList", new { i = item.Id }, new { @class = "font-weight-bold" })
+                                <span onclick="myFunction(this); " id=@item.Id class="fa fa-thumbs-up"></span>
+                                <span class="float-right" data-toggle="tooltip" data-placement="top" title="Number of views"><i class="fa fa-eye" aria-hidden="true"></i>@item.Views</span>
+                            </p>
+                                </td>
 
-        </table>
+                    </tr>
+
+
+                }
+
+            </table>
+        </div>
     </div>
-</div>
-<div>
-    @foreach (var person in ViewBag.data)
-    {
-        <script>
+    <div>
+        @foreach (var person in ViewBag.data)
+        {
+            <script>
             $("#@person").removeClass("fa-thumbs-up");
             $("#@person").addClass("fa-thumbs-down");
-        </script>
-        
-    }
-</div>
-        <script>
+            </script>
+
+        }
+        <div id="UserControl">
+
+        </div>
+    </div>
+    @section Scripts{
+         }
+    <script>
+    $(document).ready(function () {
+        $('#UserControl').load("/TopicList/Details/" + @ViewBag.Topicid);
+        $("#showAnswer").click(function () {
+            var a = $("#showAnswer").val();
+            $('#UserControl').load("/TopicList/Details/" + $("#showAnswer").val());
+
+        });
+    });
+    </script>
+    <script>
             function myFunction(x) {
-                
-               
+
+
                 if ($(x).hasClass("fa-thumbs-up")) {
                     //alert($(x).id);
                      $.ajax({
@@ -70,11 +91,11 @@
                         data: JSON.stringify({ id: x.id }),
                         dataType: 'json',
                          success: function (data) {
-                             
 
-                            
+
+
                         }
-                        
+
                      });
                     toastr.success('You like This Post.');
                 } else{
@@ -85,17 +106,16 @@
                         data: JSON.stringify({ id: x.id }),
                         dataType: 'json',
                          success: function (data) {
-                             
 
-                            
+
+
                         }
                     });
                     toastr.options = {
-                    "closeButton": false,
+                        "closeButton": true,
                     "debug": false,
                     "newestOnTop": false,
                     "progressBar": true,
-                   "positionClass": "toast-bottom-left",
                     "preventDuplicates": true,
                     "onclick": null,
                     "showDuration": "300",
@@ -110,22 +130,31 @@
                     toastr.error('You dislike This Post.');
                 }
                 $(x).toggleClass("fa-thumbs-down fa-thumbs-up");
-                
+
                 }
-            
-        </script>
-<style>
-   
-    table {
-        border-collapse: collapse;
-        table-layout: fixed;
-        
-    }
 
-    table td {
-        border: solid 1px #fab;
-        width: 150px;
-        word-wrap: break-word;
-    }
+    </script>
+    <style>
 
-</style>
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+            table td {
+                border: solid 1px #fab;
+                width: 150px;
+                word-wrap: break-word;
+            }
+    </style>
+}
+else
+{
+    <script>
+        swal({
+            title: "Sorry No Topic Found",
+            text: "",
+            icon:"error"
+        });
+    </script>
+}

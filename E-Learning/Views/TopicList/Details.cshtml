@@ -2,67 +2,69 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<div id="accordion" class="vivify popInBottom  shadow">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    @Html.DisplayNameFor(model => model.TopicName)
+                </button>
+            </h5>
+        </div>
 
-<div>
-    <h4>TopicList</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Course.Cname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Course.Cname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TopicName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TopicName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VideoPath)
-        </dt>
-
-        <dd>
-            <div class="embed-responsive embed-responsive-16by9">
-               
-                <video width="240" class="video-fluid z-depth-1" style="height: auto;" controls  disablePictureInPicture controlsList="nodownload">
-        <source src="@Url.Content( Model.VideoPath)" type="video/mp4">
-                Your browser does not support the video tag.
-                </video>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <h2 class="text-left">
+                    @Html.DisplayFor(model => model.TopicName)
+                </h2>
             </div>
-        </dd>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    @Html.DisplayNameFor(model => model.Description)
+                </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body text-wrap container">
+                <h4 class="text-left">
+                    @Html.DisplayFor(model => model.Description)
+                </h4>
+            </div>
+        </div>
+    </div>
+    @if (Model.PdfContent != null)
+    {
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        @Html.DisplayNameFor(model => model.PdfContent)
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    @{
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PdfContent)
-        </dt>
+                        var base64 = Convert.ToBase64String(Model.PdfContent);
+                        var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                        <h2 class="text-capitalize text-left text-danger">
+                            <a href="@imgSrc" download="">Download File</a>
+                        </h2>
 
-        <dd>
-            @{
-                var base64 = Convert.ToBase64String(Model.PdfContent);
-                var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
-                <a href="@imgSrc" download="">Download File</a>
-            }
-        </dd>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 
-    </dl>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

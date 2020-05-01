@@ -1,0 +1,130 @@
+﻿@model E_Learning.Models.Course
+
+@{
+    ViewBag.Title = "TutorCourseEdit";
+}
+<div class=" text-center text-capitalize  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2><i class="fa fa-edit"></i> Course Edit</h2>
+</div>
+
+<hr />
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-capitalize bg-light text-center">
+                    <div class="card-title text-center "><h3>Edit Course: @Html.DisplayFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control shadow" } })</h3></div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "CourseAdd", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="form-group">
+                                <h3 class="m-0 p-0">
+                                    @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "" })
+
+                                </h3>
+
+
+                                <div class="">
+                                    @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control shadow" } })
+                                    @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h3 class="m-0 p-0">
+                                    @Html.LabelFor(model => model.Clevel, htmlAttributes: new { @class = "" })
+
+                                </h3>
+
+
+                                <div class="">
+                                    @Html.EnumDropDownListFor(model => model.Clevel, htmlAttributes: new { @class = "form-control shadow" })
+                                    @Html.ValidationMessageFor(model => model.Clevel, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group d-inline">
+
+                                <h3 class="m-0 p-0">
+
+                                    @Html.Label("Free Or Paid", htmlAttributes: new { @class = " fw-mediumbold" })
+                                    <span style="color:red;font-size:19px"> *</span>
+                                    <label class="form-check-label">
+                                        @if (Model.Fee > 0)
+                                        {
+                                            @Html.CheckBoxFor(model => model.Version, new { @checked = "checked", @class = "form-check-input" })
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(model => model.Version, new { @checked = "checked", @class = "form-check-input" })
+                                        }
+
+                                        <span class="form-check-sign" typeof="checkbox" id="Version">Paid </span>
+                                        @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+                                    </label>
+                                </h3>
+
+                            </div>
+
+                            <div class="form-group " id="FeeDiv">
+                                <div class="shadow">
+                                    @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+
+                                        <button type="submit" value="Edit" class="btn btn-primary btn-block badge-success " style="font-size:1.5rem;">Save &nbsp;<i class="fa fa-save fa-xs"></i></button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+           
+
+
+                    @section scripts{
+                        <script src="~/Scripts/requiredAsterik.js"></script>
+                        <script>
+        $(document).ready(function () {
+           $("input[type='hidden'][name='Version']").remove();
+            $("#Version").change(function () {
+                if ($(this).is(":checked")) {
+                    $("#FeeDiv").show(300);
+                    $("#Fee").val(@Model.Fee);
+                } else {
+
+                    $("#FeeDiv").hide(200);
+                    $("#Fee").val(0);
+                }
+            });
+        });
+                        </script>
+                    }

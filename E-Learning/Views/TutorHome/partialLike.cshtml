@@ -1,0 +1,51 @@
+﻿@model IEnumerable<E_Learning.Models.TotalLike>
+
+
+
+    <table class="table  table-hover text-center">
+        @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorDetail.Fname)
+            </th>
+
+
+
+        </tr>*@
+        <tbody class="table-bordered-bd-danger"></tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+
+            <td>
+
+                                    <h5 class="card-title text-dark"><u>Course</u> </h5>
+                                    <p class="card-text ">
+                                        @Html.DisplayFor(modelItem => item.TopicList.Course.Cname)
+                                    </p>
+                </td>
+            <td>
+                                    <h5 class="card-title"><u>Course Level</u> </h5>
+                                    <p class="card-text">
+                                        @Html.DisplayFor(modelItem => item.TopicList.Course.Id)
+                                    </p>
+                </td>
+            <td>
+                                    <h5 class="card-title fa fa-thumbs-o-up"> Total Like </h5>
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    <p class="card-text">
+                                        @Html.DisplayFor(modelItem => item.totalLike)
+                                    </p>
+                                
+                </td>
+            
+            
+        </tr>
+                }
+            
+        </table>
+
+<style>
+</style>
+
+

@@ -2,120 +2,156 @@
 @{
     ViewBag.Title = "Index";
 }
-    <link href="~/Content/Custome CSS/HovarEffect.css" rel="stylesheet" />
-<h2>Index</h2>
-<table class="table table-borderless table-hover table-responsive-md">
+
     
-    <tbody>
-        <tr>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar1.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2 style="color:orange;">Add Courses</h2>
-                            <p>
-                                @*<a href="/CourseAdd" >Create new</a>*@
-                                @Html.ActionLink("Create New", "Create", "CourseAdd")
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2 style="color:orange;">Add Topic</h2>
-                            <p>
-                                @*<a href="/CourseAdd" >Create new</a>*@
-                                @Html.ActionLink("AddTopic", "Index", "TopicList")
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2 style="color:orange;">Add Question Topic</h2>
-                            <p>
-                                @*<a href="/CourseAdd" >Create new</a>*@
-                                @Html.ActionLink("AddTopic", "Index", "TopicList",  new {addquestion = "1"},null)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2 style="color:orange;">Effect </h2>
-                            <p>
-                                @Html.ActionLink("My course", "TutorCourse", "Tutor", new { id = "1" }, null)
-                            </p>
-                        </div>
-                    </div>
-                </div>
+<div class="  ">
+    <div class="col">
 
-            </td>
-        </tr>
 
-        <tr>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/mycourses.jpg" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2 class="alert-success">My</h2>
-                            <p>
-                                <a href="#">LINK HERE</a>
-                            </p>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-stats card-success font-weight-bold shadow" @*style="background:#59d05d;"*@>
+                    <div class="card-body vivify popIn ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="la la-book"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                
+                                <div class="numbers">
+                                    <h1 class="card-title text-dark">Create Course</h1>
+                                    <h1 class="card-title"> @ViewBag.coursecount</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2>Effect 12</h2>
-                            <p>
-                                <a href="#">LINK HERE</a>
-                            </p>
-                        </div>
+                    <div class="card-footer text-right card-stats ">
+                        <a class="text-white text-right" href="/courseadd/create">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
-            </td>
-            <td>
-                <div class="card" style="width: 18rem;">
-                    <div class="hovereffect">
-                        @*<img class="img-responsive" src="http://placehold.it/350x250" alt="">*@
-                        <img src="~/Image/img_avatar3.png" class=" img-responsive rounded img-fluid" alt="Cinque Terre">
-                        <div class="overlay">
-                            <h2>Effect 12</h2>
-                            <p>
-                                <a href="#">LINK HERE</a>
-                            </p>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-stats card-danger font-weight-bold shadow" @*style="background:#59d05d;"*@>
+                    <div class="card-body vivify popIn">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class=" fa fa-photo-video"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                   
+                                    <h1 class="card-title  text-dark">Add Topic</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="card-footer text-right card-stats ">
+                        <a class="text-white text-right" href="/topiclist/index">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
                 </div>
-            </td>
-            <td></td>
-        </tr>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-stats card-warning font-weight-bold shadow" @*style="background:#59d05d;"*@>
+                    <div class="card-body vivify popIn">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="la la-question"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                   
+                                    <h1 class="card-title  text-dark">Add Question</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right card-stats ">
+                        <a class="text-white text-right" href="/topiclist/index?addquestion=1">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-stats card-danger font-weight-bold shadow" @*style="background:#59d05d;"*@>
+                    <div class="card-body vivify popIn">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="fa fa-book-open"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <h1 class="card-title  text-dark">My Course</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right card-stats ">
+                        <a class="text-white text-right" href="/tutor/tutorcourse">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </tbody>
-</table>
+      
 
+    </div>
+
+</div>
+
+<div class="card">
+    <div class="card-header bg-info">
+        <h1 class="card-title text-center">My Course</h1>
+        
+    </div>
+    <div class="card-body">
+        @{
+            Html.RenderAction("partialIndex");
+           
+            
+        }
+    </div>
+</div>
+
+<div class="row row-card-no-pd">
+    <div class="col-md-6" >
+        <div class="card">
+            <div class="card-header text-center text-dark font-weight-bold" style="background:#DAF7A6;"><h4>Top Liked Courses</h4></div>
+            <div class="card-body">
+              
+               <div class="body-content">
+                   @{
+                       Html.RenderAction("partialLike");
+                   }
+               </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header text-center text-dark font-weight-bold" style="background:#DAF7A6;"><h4>Top Views</h4></div>
+            @{
+
+                Html.RenderAction("TotalTopicLike");
+
+            }
+        </div>
+    </div>
+   
+</div>

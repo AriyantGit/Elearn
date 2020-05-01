@@ -1,0 +1,38 @@
+﻿@model E_Learning.Models.Course
+
+
+<table class="table text-center">
+    <tr class=" align-baseline">
+        <th>
+            @Html.DisplayNameFor(model => model.Cname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+   <tbody>
+       <tr>
+           <td>
+               <h6>
+                   @Html.DisplayFor(model => model.Cname)
+               </h6>
+           </td>
+           <td class="text-muted">
+               
+               @Html.DisplayFor(model => model.DateCreated)
+           </td>
+           <td class="">
+               @*@Html.ActionLink("Details", "TopicList", new { controller = "TopicList", courseid = Model.Id }, new { @class = "btn btn-primary " })
+               <i class="fa fa-info-circle" aria-expanded="false"></i>*@
+               <a class="btn btn-info hvr-bounce-in text-dark font-weight-bold" href="/Topiclist/topiclist?courseid=@Model.Id ">
+                   <span>Details</span>
+                   <span><i class="fa fa-info"></i></span>
+               </a>
+           </td>
+       </tr>
+   </tbody>
+
+</table>

@@ -1,0 +1,338 @@
+﻿@model E_Learning.Models.TopicList
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class=" text-center  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-edit"></i>Edit Topic Name: &nbsp;@Model.TopicName</h2>
+</div>
+
+<hr />
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-capitalize bg-light text-center">
+                    <div class="card-title text-center "><h3>Edit Topic</h3></div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "topiclist", FormMethod.Post, new { @id = "myForm", @name = "myForm", enctype = "multipart/form-data" }))
+
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+
+                            <div class="form-group">
+
+                                <h3>
+                                    @Html.LabelFor(model => model.TopicName, htmlAttributes: new { @class = "control-label " })
+
+                                </h3>
+
+
+
+
+                                <div class="">
+
+                                    @Html.EditorFor(model => model.TopicName, new { htmlAttributes = new { @class = "form-control shadow text-dark" } })
+
+                                    @Html.ValidationMessageFor(model => model.TopicName, "", new { @class = "text-danger font-weight-bolder " })
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <h3>
+                                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                </h3>
+
+
+                                <div class="">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control required shadow", @cols = 40, @rows = 10 })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger font-weight-bolder" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                                    <!-- Accordion card -->
+                                    <div class="card">
+
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingOne2">
+                                            <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne2" aria-expanded="true"
+                                               aria-controls="collapseOne1">
+                                                <h5 class="mb-0">
+                                                    Upload Video <i class="fas fa-angle-down rotate-icon"></i>
+                                                </h5>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseOne2" class="collapse hide" role="tabpanel" aria-labelledby="headingOne2"
+                                             data-parent="#accordionEx">
+                                            <div class="card-body">
+                                                <div class=" embed-responsive embed-responsive-16by9 col-xl-9">
+
+                                                    <video width="240" class="video-fluid z-depth-1 fa " style="height: auto;" controls disablePictureInPicture controlsList="nodownload">
+                                                        <source src="@Model.VideoPath" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div>
+                                    <h3>
+
+                                        @Html.LabelFor(model => model.VideoPath, htmlAttributes: new { @class = "control-label " })
+
+
+                                    </h3>
+
+                                </div>
+
+                                <div class="">
+                                    <div class="custom-file ">
+
+                                        <label class="custom-file-label text-center shadow" id="videolebel" required for="customFile"><i class="far fa-file-video text-secondary fa-1x ">&nbsp; Choose file</i></label>
+                                        <input type="file" class="" id="customFile" name="customFile" accept="video/*">
+
+                                    </div>
+                                    <div class="text-center" id="videodiv">
+                                        <video width="400" id="videoPreview" controls style="display:none" allowfullscreen="false" controls="false" disablePictureInPicture disableFullScreen controlsList="nodownload">
+                                            <source src="" id="video_here">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+                                    </div>
+                                    @*<input type="file" name="file[]" class="file_multi_video" accept="video/*" />*@
+                                    @Html.ValidationMessageFor(model => model.VideoPath, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                                    <!-- Accordion card -->
+                                    <div class="card">
+
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingOne1">
+                                            <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                               aria-controls="collapseOne1">
+                                                <h5 class="mb-0">
+                                                    Uploaded PDF <i class="fas text-right fa-angle-down rotate-icon"></i>
+                                                </h5>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseOne1" class="collapse hide" role="tabpanel" aria-labelledby="headingOne1"
+                                             data-parent="#accordionEx">
+                                            <div class="card-body">
+                                                @if (Model.PdfContent != null)
+                                                {
+
+
+                                                    //   @{
+
+                                                    var base64 = Convert.ToBase64String(Model.PdfContent);
+                                                    var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                                                    <a href="@imgSrc" class="text-left  text-danger" download="">Download File</a>
+
+
+                                                    // }
+
+                                                }
+                                                else
+                                                {
+
+                                                    <h3 class="text-left text-danger"> Not Uploaded Yet</h3>
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <h3>
+                                    @Html.LabelFor(model => model.PdfContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </h3>
+                                <div class="">
+                                    <div class="custom-file mb-3 shadow text-center">
+
+                                        <label class="custom-file-label" for="pdffile" id="pdflebel"><i class="far fa-file-pdf text-secondary fa-1x ">&nbsp; </i>Choose file</label>
+                                        <input type="file" class="" id="pdffile" name="pdffile" accept="application/pdf">
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.PdfContent, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 btn-block text-center">
+                                    
+
+                                    <button type="submit" value="Create" class="btn btn-info btn-lg text-center d-flex  justify-content-center d-md-table mx-auto hvr-shutter-out-horizontal" id="btnsubmit">
+
+                                        <span class=" vivify popInLeft delay-1000">Update Topic</span>
+                                        <span><i class="la la-folder-open"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/Scripts/requiredAsterik.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+        $(document).ready(function () {
+
+
+
+            //Video Tag
+            // $(document).on("change", ".file_multi_video", function (evt) {
+
+            $("#customFile").change(function () {
+                //alert();
+                $("#videodiv").addClass(" p-2 m-1");
+                var validExtensions = ["MP4", "mp4"]//"jpeg","gif","png"]//
+                var file = $(this).val().split('.').pop();
+                if (validExtensions.indexOf(file) == -1) {
+                    swal({
+                        title: "Only allowed :" + validExtensions.join(', '),
+                        icon: "warning",
+                        // buttons: true,
+                        dangerMode: true,
+                    });
+                    $("#customFile").val('');// = "";
+                    $('#videoPreview').trigger('pause');
+                    $('#videoPreview').removeAttr('src');
+                    $("#videoPreview").hide(700);
+                    $("#videolebel").text("  Choose file");
+                    $("#videolebel").addClass("fa fa-file-video text-mute");
+                    $("#videodiv").removeClass(" p-2 m-1");
+                }
+                else {
+                    //alert($("#customFile").val());
+                    if ($("#customFile").val() != "") {
+                        var $source = $('#video_here');
+                        $source[0].src = URL.createObjectURL(this.files[0]);
+                        $source.parent()[0].load();
+                        $("#videoPreview").show(700);
+                        $("#videolebel").text($("#customFile").val());
+
+                    }
+                    else {
+                        $('#videoPreview').trigger('pause');
+                        $('#videoPreview').removeAttr('src');
+                        $("#videoPreview").hide(700);
+                        // var vid = document.getElementById("videoPreview").src;
+                        //alert("sourc"+vid);
+                        $("#videolebel").text("Choose file");
+                    }
+                }
+
+
+
+            });
+
+            $("#pdffile").change(function () {
+                var validExtensions = ["pdf", "PDF"]//"jpeg","gif","png"]//
+                $("#pdflebel").text($(this).val());
+                var file = $(this).val().split('.').pop();
+                if (validExtensions.indexOf(file) == -1) {
+                    swal({
+                        title: "Only allowed :" + validExtensions.join(', '),
+                        icon: "warning",
+                        // buttons: true,
+                        dangerMode: true,
+                    });
+                    //alert("Only formats are allowed : " + validExtensions.join(', '));
+                    $("#pdffile").val('');
+                    $("#pdflebel").text("Choose File");
+                    $("#pdflebel").addClass("fa fa-file-pdf text-mute");
+                }
+
+
+            });
+            $(document).on('click', '#btnsubmit', function (e) {
+                e.preventDefault();
+                var videocontent = "@Model.VideoPath";
+                var pdfcontent = "@Model.PdfContent";
+                if ($("#customFile").val() == '' && videocontent=='') {
+                    swal({
+                        title: "Video File is Mandatpry",
+                        icon: "warning",
+                        // buttons: true,
+                        dangerMode: true,
+                    });
+                } else {
+                    if ($("#pdffile").val() == '' && pdfcontent=='') {
+
+                        swal({
+                            title: "Are you not want to add Pdf File?",
+                            icon: "warning",
+                            buttons: true,
+                            //dangerMode: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+
+                                if (willDelete) {
+
+                                    $("#myForm").submit()
+                                }
+
+                            });
+
+                    } else {
+                        $("#myForm").submit()
+                    }
+
+                }
+
+                //alert($("#customFile").val());
+
+
+            });
+
+
+
+        });
+                        </script>
+                    }

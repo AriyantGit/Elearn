@@ -1,4 +1,5 @@
-﻿using E_Learning.Models;
+﻿using E_Learning.Filter;
+using E_Learning.Models;
 using E_Learning.Models.DAL;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 
 namespace E_Learning.Controllers
 {
+    [Authorize]
+    [SessionTimeout]
     public class CourseAddController : Controller
     {
         _IAllRepository<Course> obj;
@@ -16,6 +19,9 @@ namespace E_Learning.Controllers
             this.obj = new AllRepository<Course>();
         }
         // GET: CourseAdd
+        [CustomAuthenticationFilter]
+        [Authorize(Roles ="Tutor,Admin")]
+        
         public ActionResult Index()
         {
             return View(obj.GetAll().Where(x=>x.TutorId == Convert.ToInt32(Session["TutorId"])).ToList());
@@ -28,6 +34,8 @@ namespace E_Learning.Controllers
         }
 
         // GET: CourseAdd/Create
+        [CustomAuthenticationFilter]
+        [Authorize(Roles = "Tutor,Admin")]
         public ActionResult Create()
         {
             return View();
@@ -35,23 +43,26 @@ namespace E_Learning.Controllers
 
         // POST: CourseAdd/Create
         [HttpPost]
+        [CustomAuthenticationFilter]
+        [Authorize(Roles = "Tutor,Admin")]
         public ActionResult Create(Course collection)
         {
             try
             {
 
                 // TODO: Add insert logic here
-                collection.TutorId =Convert.ToInt32(Session["TutorId"]);
+                collection.TutorId =  Convert.ToInt32(Session["TutorId"]);
                 obj.InsertModel(collection);
                 obj.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Tutorcourse","Tutor");
             }
             catch(Exception ex)
             {
                 return View(ex);
             }
         }
-
+        [CustomAuthenticationFilter]
+        [Authorize(Roles = "Tutor,Admin")]
         // GET: CourseAdd/Edit/5
         public ActionResult Edit(int id)
         {
@@ -60,13 +71,26 @@ namespace E_Learning.Controllers
 
         // POST: CourseAdd/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [CustomAuthenticationFilter]
+        [Authorize(Roles = "Tutor,Admin")]
+        public ActionResult Edit(int id, Course c)
         {
             try
             {
                 // TODO: Add update logic here
+                var coursedtls = obj.GetModelById(id);
+                if (coursedtls != null)
+                {
+                    coursedtls.Cname = c.Cname;
+                    coursedtls.Clevel = c.Clevel;
+                    coursedtls.Fee = c.Fee;
+                    obj.UpdateModel(coursedtls);
+                    obj.Save();
+                    TempData["Update"] = "Course Update Sucessfully done";
+                    return RedirectToAction("TutorCourse","Tutor");
+                }
 
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {

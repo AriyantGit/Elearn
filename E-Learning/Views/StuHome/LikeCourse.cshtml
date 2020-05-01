@@ -1,0 +1,52 @@
+﻿@model IEnumerable<E_Learning.Models.TotalLike>
+
+<div class="container">
+    <div class="row">
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm">
+               
+                    <div class="card ">
+                        <div class="card-header text-capitalize  bg-light alert-danger">
+                            @Html.DisplayFor(modelItem => item.Course.Cname)
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><u>Author</u> </h5>
+                            <p class="card-text ">
+                                @Html.DisplayFor(modelItem => item.Course.TutorDetail.Fname) &nbsp; @Html.DisplayFor(modelItem => item.Course.TutorDetail.Lname)
+                            </p>
+                            <h5 class="card-title"><u>Course Level</u> </h5>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.Course.Clevel)
+                            </p>
+                            <h5 class="card-title"><u>Course Fees</u> </h5>
+                            <p class="card-text">
+                                <i class="fa fa-credit-card " aria-hidden="true"></i>  @Html.DisplayFor(modelItem => item.Course.Fee)
+                            </p>
+                            <h5 class="card-title"> Total Like </h5>
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <p class="card-text">
+                                @Html.DisplayFor(modelItem => item.totalLike)
+                            </p>
+
+                        </div>
+                        <div class="card-footer text-lg-center  ">
+                            @*@Html.ActionLink("Registration", "Registration", new { id = item.Course.Id }, new { @class = "btn-block text-center hvr-sweep-to-right" })*@
+                            <a href="/stuhome/Registration/@item.Course.Id" value="Create" class="p-2 m-2 btn hvr-sweep-to-right btn-success btn-lg text-center d-flex  justify-content-center d-md-table mx-auto">
+
+                                <span class=" vivify popInLeft delay-1000">Registration</span>
+                                <span><i class="fa fa-marker"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+               
+
+            </div>
+        }
+
+    </div>
+
+</div>

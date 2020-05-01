@@ -1,72 +1,173 @@
-﻿@model E_Learning.Models.Course
+﻿@model IEnumerable<E_Learning.Models.TotalLike>
 
 @{
-    ViewBag.Title = "Registration";
+    ViewBag.Title = "test";
 }
 
-<h2>Registration</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    {
+<table class="table table-hover bg-warning">
 
-        <div>
-            <h4>Course</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.TutorDetail.Fname)
-                </dt>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td>
+                <div class="card border">
+                    <div class="card-header  text-capitalize  bg-light alert-primary">
+                        <div class="h2 text-center">
+                            <strong>
+                                <text>Course Details</text>
 
-                <dd>
-                    @Html.DisplayFor(model => model.TutorDetail.Fname)
-                </dd>
+                            </strong>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <u>Course Name :&nbsp;</u>
+                            <span>
+                                <p class="card-text ">
+                                    @Html.DisplayFor(modelItem => item.Course.Cname)
+                                </p>
+                            </span>
+                        </h5>
+                        <h5 class="card-title">
+                            <u>Author :&nbsp;</u>
+                            <span>
+                                <p class="card-text ">
+                                    @Html.DisplayFor(modelItem => item.Course.TutorDetail.Fname) &nbsp; @Html.DisplayFor(modelItem => item.Course.TutorDetail.Lname)
+                                </p>
+                            </span>
+                        </h5>
+                        <h5 class="card-title">
+                            <u>Course Level</u>
+                            <span>
+                                <p class="card-text">
+                                    @Html.DisplayFor(modelItem => item.Course.Clevel)
+                                </p>
+                            </span>
+                        </h5>
+                        <h5 class="card-title">
+                            <u>Course Fees</u>
+                            <span>
+                                <p class="card-text">
+                                    <i class="fa fa-credit-card " aria-hidden="true"></i>  @Html.DisplayFor(modelItem => item.Course.Fee)
+                                </p>
+                            </span>
+                        </h5>
+                        <h5 class="card-title">
+                            <u> Total Topic</u>
+                            <span>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Cname)
-                    
-                </dt>
+                                <p class="card-text fa fa-video">
+                                    @Html.DisplayFor(modelItem => item.totalLike)
+                                </p>
+                            </span>
+                        </h5>
+                        @{
+                            if (ViewBag.video != null)
 
-                <dd>
-                    @Html.DisplayFor(model => model.Cname)
-                </dd>
+                            {
+                                <div class="row-cols-sm-6">
+                                    <strong><u>Demo Video</u></strong>
+                                    <img src="~/Image/Demo-video.png" width="70px" height="100px" class="img-fluid img-thumbnail" data-toggle="modal" data-target="#modal6" class="btn btn-primary fa fa-file-video" data-backdrop="static" id="open" data-keyboard="false">
+                                </div>
+                            }
+                        }
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Clevel)
-                </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Clevel)
-                </dd>
+                    </div>
+                    <div class="card-footer text-lg-center ">
+                        @{
+                            if (ViewBag.reg == null)
+                            {
+                                using (Html.BeginForm("RegistrationIndex","cart",FormMethod.Get))
+                                {
+                                   
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Version)
-                </dt>
+                                                <input type="hidden" name="id" value="@item.Course.Id">
+                                         <button type="submit" href="/cart/RegistrationIndex/@item.Course.Id" value="Create" class="p-2 m-2 btn hvr-sweep-to-right btn-success btn-lg text-center d-flex  justify-content-center d-md-table mx-auto">
 
-                <dd>
-                    @Html.DisplayFor(model => model.Version)
-                </dd>
+                                    <span class=" vivify popInLeft delay-1000">Add to Cart</span>
+                                    <span><i class="fa fa-shopping-cart"></i></span>
+                                </button>
+                                }
+                               
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Fee)
-                </dt>
+                            }
+                            else
+                            {
+                                <div class="form-control bg-danger text-center">
+                                    <label class="text-white">
+                                        <strong>
+                                            You Already Register This Course.Thank You
 
-                <dd>
-                    @Html.DisplayFor(model => model.Fee)
-                </dd>
+                                        </strong>
+                                    </label>
+                                </div>
+                            }
+                        }
 
-            </dl>
-        </div>
+                    </div>
+                   
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+            </td>
+        }
+    </tr>
+</table>
+
+<style>
+    .card-footer:hover {
+        background-color: cornflowerblue;
+        font-size: 18px;
     }
-}
+</style>
 
-@*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+
+<div class="col-lg-4 col-md-6 mb-4 " id="videodiv" >
+
+    <!--Modal: Name-->
+    <div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <!--Content-->
+            <div class="modal-content">
+
+                <!--Body-->
+
+                
+                <video width="100%" class="video-fluid z-depth-1 fa " id="movie" style="height: auto;" allowfullscreen="false" controls="false" disablePictureInPicture disableFullScreen controlsList="nodownload">
+                    <source src="@ViewBag.video" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+
+
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" id="close" data-dismiss="modal">Close</button>
+
+                </div>
+
+            </div>
+            <!--/.Content-->
+
+        </div>
+    </div>
+    <!--Modal: Name-->
+   
+    
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#open').click(function () {
+            $('videodiv').addClass("vivify popIn");
+            $('video').trigger('play');
+        });
+        $('#close').click(function () {
+            $('video').trigger('pause');
+        });
+});
+</script>

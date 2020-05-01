@@ -1,65 +1,134 @@
 ﻿
 
-@using (Html.BeginForm()) 
+<script src="~/Content/Sweetalaert/sweetalert.js"></script>
+<script>
+    $(document).ready(function () {
+        var a;
+        $("#btnsrch").mouseover(function () {
+            $("#isrch").toggleClass("popout popIn");
+
+        });
+
+
+
+
+        $(document).on('click', '#btnsrch', function (e) {
+            e.preventDefault();
+            if ($("#searchtext").val() != '') {
+                swal({
+                    icon: "info",
+                    text: "You Are searching " + $("#searchtext").val(),
+                    timer: 2000
+                }).then(function () {
+                    $('#srchform').submit();
+                });
+            }
+            else {
+                swal({
+
+                    text: "You Are not typing Anything",
+                    icon: "warning",
+                    timer: 3000
+
+                });
+            }
+
+        });
+
+
+
+
+        $("#searchtext").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Stuhome/CourseAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        //alert(data);
+                        response($.map(data, function (item) {
+                            return { label: item.Cname };
+
+                        }))
+
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                $("#searchtext").val(ui.item.label);
+                a = $("#searchtext").val();
+                //alert(a);
+            }
+
+
+        });
+    });
+
+</script>
+
+@using (Html.BeginForm("searchcoursedetials", "Stuhome", FormMethod.Get, new { id = "srchform", @class = " md-form mr-auto mb-4" }))
+
 {
+
     @Html.AntiForgeryToken()
-    
-    <div class="container-fluid">
-        @Html.Action("ListCourse")
-    </div>
-    
-    @*<div class="form-horizontal">
-        <h4>StudentCourseRegistration</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, "StudentId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    {
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <h1 class="text-center text-capitalize vivify popInLeft">search course</h1>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TopicListId, "TopicListId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TopicListId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TopicListId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <input class="form-control mr-sm-2  border-bottom " type="text" id="searchtext" name="searchtext" placeholder="search" aria-label="search">
+        <br />
+        <div class="d-flex justify-content-center row-cols-lg-4 vivify popIn">
+            <button type="button" class="hvr-bounce-to-top btn btn btn-primary text-center" id="btnsrch">
+                <h3 class="text-uppercase">
+                    search     &nbsp;<i id="isrch" class="fa fa-search"></i>
+                </h3>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserModified, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserModified, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserModified, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            </button>
         </div>
-    </div>*@
+        <br />
+
+
+
+    }
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="card vivify driveInTop">
+    <div class="card-header " style="background-color:#EF925D ;">
+        <div class="card-title text-center"><h3 class="text-white">Latest Course</h3></div>
+    </div>
+    <div class="card-body">
+        <div class="card-sub">
+            @Html.Action("ListCourse")
+        </div>
+    </div>
 </div>
+
+
+<div class="card vivify popInBottom">
+    <div class="card-header " style="background-color:#799854  ;">
+        <div class="card-title text-center"><h3 class="text-white">Top Liked Course</h3></div>
+    </div>
+    <div class="card-body">
+        <div class="card-sub">
+            @Html.Action("LikeCourse")
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+
+<link href="~/Content/BUttonCss/hover.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Grid column -->

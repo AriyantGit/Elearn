@@ -3,51 +3,58 @@
 @{
     ViewBag.Title = "TutorCourse";
 }
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-<h2>TutorCourse</h2>
+<link href="~/Content/Datatable/dataTables.bootsrap4.min.css" rel="stylesheet" />
+<script src="~/Content/Datatable/jquery.dataTables.min.js"></script>
+<script src="~/Content/Datatable/dataTables.bootstrap4.min.js"></script>
+<div class=" text-center  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-book-open"></i>My Course</h2>
+</div>
 
-<table class="table">
-    <tr>
+<hr />
+<div class="card">
+    
+    <div class="card-body">
+        <table id="mytable" class="table text-center fw-bold table-striped-bg-*states vivify driveInBottom text-capitalize">
+            <thead>
+                <tr class=" text-center font-weight-bold">
 
-        <th>
-            @Html.DisplayNameFor(model => model.Cname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Clevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fee)
-        </th>
-        <th>
-            total student
-           
-        </th>
-        <th>Action</th>
-    </tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Clevel)
+                    </th>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Cname)@Html.DisplayFor(modelItem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Clevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fee)
-        </td>
-        <td>
-            <label>
-                
-                <div id="@item.Id">
-                    <script>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fee)
+                    </th>
+                    <th>
+                        total student
+
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Clevel)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fee)
+                        </td>
+                        <td>
+                            <label>
+
+                                <div id="@item.Id">
+                                    <script>
 
                         $(document).ready(function () {
 
@@ -56,20 +63,56 @@
 
                         });
 
-                    </script>
-                </div>
+                                    </script>
+                                </div>
 
-            </label>
-        </td>
-        <td>
-            @*@Html.ActionLink("Details", "CourseDetails", new { id = item.Id })*@
-            @using (Html.BeginForm("CourseDetails", "Tutor", FormMethod.Post))
-            {
-                <input type="hidden" name="id" value="@item.Id" />
-                <input type="submit" value="Details" class="btn btn-warning"/>
-            }
-        </td>
-    </tr>
+                            </label>
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Details", "CourseDetails", new { id = item.Id })*@
+                            @using (Html.BeginForm("CourseDetails", "Tutor", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@item.Id" />
+                                @*<input type="submit" value="Details" class="btn btn-danger btn-block badge-warning fa fa-dev" />*@
+                                <button type="submit" class="btn btn-success hvr-shutter-in-vertical alert-danger  btn-block ">
+
+                                    <span class=" vivify fw-extrabold text-dark popInLeft delay-1000">Details</span>
+                                    <span><i class="la la-eye-slash"></i></span>
+                                </button>
+                            }
+                            @using (Html.BeginForm("TutorCourseEdit", "Tutor", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@item.Id" />
+                                @*<input type="submit" value="Edit" class="btn btn-primary btn-block badge-success " />*@
+                                <button type="submit" value="Edit" class="btn btn-primary btn-block badge-success ">Edit &nbsp;<i class="fa fa-pen fa-xs"></i></button>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+    <script src="~/Content/toastr/toastr.min.js"></script>
+    @if (ViewBag.update != null)
+    {
+        <script>
+                    toastr.success("@ViewBag.update");
+
+
+        </script>
+    }
+    <script>
+        $(document).ready(function () {
+            $("#mytable").datatable({});
+        });
+    </script>
 }
 
-</table>

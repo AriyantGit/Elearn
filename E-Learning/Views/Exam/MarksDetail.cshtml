@@ -4,58 +4,208 @@
     ViewBag.Title = "MarksDetail";
 }
 
-<h2>MarksDetail</h2>
 
-<div>
-
-    <hr />
-    <table class=" table table-hover">
-        <thead class="alert-danger">
-            <tr>
-                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.Course.Cname)@Html.DisplayNameFor(model => model.CourseId) </td>
-                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.MarksObtain)</td>
-                <td class="text-center font-weight-bold alert-primary"> @Html.DisplayNameFor(model => model.percentage)</td>
-                <td class="text-center font-weight-bold alert-primary"><label>Total Marks </label></td>
-
-                <td class="text-center font-weight-bold alert-primary">@Html.DisplayNameFor(model => model.TickAnsr)</td>
-                @if (Model.percentage >= 30.0)
-                {
-                    <td class="text-center font-weight-bold alert-primary"><label>Download</label></td>
-                }
-
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center">@Html.DisplayFor(model => model.Course.Cname)@Html.DisplayFor(model => model.Course.Id)</td>
-                <td class="text-center">@Html.DisplayFor(model => model.MarksObtain)</td>
-                <td class="text-center">@Html.DisplayFor(model => model.percentage)</td>
-                <td class="text-center "><label>@ViewBag.total</label></td>
-                <td class="text-center">@Html.DisplayFor(model => model.TickAnsr)</td>
-                @if (Model.percentage >= 30.0)
-                {
-                    <td>
-                    </td>
-                }
-            </tr>
-        </tbody>
-    </table>
-    <div id="UserControl">
-
-    </div>
-    <div class="text-center">
-        <button type="button" class="btn btn-success" value=@Html.DisplayFor(model=>model.CourseId) id="showAnswer">Show Answer</button>
-    </div>
-
+<div class=" bg-warning text-capitalize  m-2 p-3 " style="border-radius:15px;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-user-graduate"></i>Marks Detail</h2>
 </div>
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-<script>
-   $(document).ready (function(){
-       $("#showAnswer").click(function () {
-           var a = $("#showAnswer").val();
-        $('#UserControl').load("/Question/AnsrDetails/"+$("#showAnswer").val());
-        
-    });
-});
-</script>
+<hr />
+
+    <div class="container-fluid ">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <table class=" table text-capitalize table-responsive-sm">
+                            <thead class="" style="background:#DAF7A6;">
+                                <tr>
+                                    <th class="text-center font-weight-bold ">
+                                        <h6>
+                                            @Html.DisplayNameFor(model => model.Course.Cname)
+                                        </h6>
+                                    </th>
+                                    <th class="text-center font-weight-bold ">
+                                        <h6>
+                                            @Html.DisplayNameFor(model => model.MarksObtain)
+                                        </h6>
+                                    </th>
+                                    <th class="text-center font-weight-bold ">
+                                        <h6>
+                                            @Html.DisplayNameFor(model => model.percentage)
+                                        </h6>
+                                    </th>
+                                    <th class="text-center font-weight-bold ">
+                                        <h6>
+                                            Total Marks
+                                        </h6>
+                                    </th>
+
+                                    <th class="text-center font-weight-bold ">
+                                        <h6>
+                                            @Html.DisplayNameFor(model => model.TickAnsr)
+                                        </h6>
+                                    </th>
+                                    @if (Model.percentage >= 30.0)
+                                    {
+                                        <th class="text-center font-weight-bold ">
+                                            <h6>
+                                               Download
+                                            </h6>
+                                        </th>
+                                    }
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <h6>
+                                            @Html.DisplayFor(model => model.Course.Cname)
+                                        </h6>
+                                    </td>
+                                    <td class="text-center">
+                                        <h6>
+                                            @Html.DisplayFor(model => model.MarksObtain)
+                                        </h6>
+                                    </td>
+                                    <td class="text-center">
+                                        <h6>
+                                            @Html.DisplayFor(model => model.percentage)
+                                        </h6>
+                                    </td>
+                                    <td class="text-center "><h6>@ViewBag.total</h6></td>
+                                    <td class="text-center">
+                                        <h6>
+                                            @Html.DisplayFor(model => model.TickAnsr)
+                                        </h6>
+                                    </td>
+                                    @if (Model.percentage >= 30.0)
+                                    {
+                                        <td>
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid ">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <div id="UserControl">
+
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-success" value=@Html.DisplayFor(model=>model.CourseId) id="showAnswer">Show Answer</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                       
+                        <script src="~/Scripts/jquery-3.4.1.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $("#showAnswer").click(function () {
+                                    var a = $("#showAnswer").val();
+                                    $("#showAnswer").hide();
+                                    $('#UserControl').load("/Question/AnsrDetails/" + $("#showAnswer").val());
+
+                                });
+                            });
+                        </script>
+                        @*@model E_Learning.Models.AnswerDetails
+
+                        @{
+                            ViewBag.Title = "MarksDetail";
+                        }
+
+
+                        <div class=" bg-warning text-capitalize  m-2 p-3 " style="border-radius:15px;">
+                            <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-user-graduate"></i>Marks Detail</h2>
+                        </div>
+                        <hr />
+                        <div>
+
+
+                            <table class=" table ">
+                                <thead class="">
+                                    <tr style="background:#DAF7A6;">
+                                        <th class="text-center font-weight-bold ">
+                                            <h4 class="font-weight-bold">
+                                                @Html.DisplayNameFor(model => model.Course.Cname)
+                                            </h4>
+                                        </th>
+
+                                        <th class="text-center font-weight-bold ">
+                                            <h4 class="font-weight-bold">
+                                                @Html.DisplayNameFor(model => model.Course.Cname)
+                                            </h4>
+                                        </th>
+                                        <th class="text-center font-weight-bold ">
+                                            <h4 class="font-weight-bold">
+                                                @Html.DisplayNameFor(model => model.percentage)
+                                            </h4>
+                                        </th>
+                                        <th class="text-center font-weight-bold "><label>Total Marks </label></th>
+
+                                        <th class="text-center font-weight-bold ">
+                                            <h4 class="font-weight-bold">
+                                                @Html.DisplayNameFor(model => model.TickAnsr)
+                                            </h4>
+                                        </th>
+                                        @if (Model.percentage >= 30.0)
+                                        {
+                                            <th class="text-center font-weight-bold "><label>Download</label></th>
+                                        }
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">@Html.DisplayFor(model => model.Course.Cname)@Html.DisplayFor(model => model.Course.Id)</td>
+                                        <td class="text-center">@Html.DisplayFor(model => model.MarksObtain)</td>
+                                        <td class="text-center">@Html.DisplayFor(model => model.percentage)</td>
+                                        <td class="text-center "><label>@ViewBag.total</label></td>
+                                        <td class="text-center">@Html.DisplayFor(model => model.TickAnsr)</td>
+                                        @if (Model.percentage >= 30.0)
+                                        {
+                                            <td>
+                                            </td>
+                                        }
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="UserControl">
+
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-success" value=@Html.DisplayFor(model=>model.CourseId) id="showAnswer">Show Answer</button>
+                            </div>
+
+                        </div>
+                        <script src="~/Scripts/jquery-3.4.1.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $("#showAnswer").click(function () {
+                                    var a = $("#showAnswer").val();
+                                    $("#showAnswer").hide();
+                                    $('#UserControl').load("/Question/AnsrDetails/" + $("#showAnswer").val());
+
+                                });
+                            });
+                        </script>*@

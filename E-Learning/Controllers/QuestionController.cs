@@ -6,11 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using E_Learning.Filter;
 using E_Learning.Models;
 using E_Learning.Models.DAL;
 
 namespace E_Learning.Controllers
 {
+    [Authorize]
+    //[SessionTimeout]
     public class QuestionController : Controller
     {
         _IAllRepository<QuestionSet> obj;
@@ -23,11 +26,17 @@ namespace E_Learning.Controllers
         //private DbModel db = new DbModel();
 
         // GET: Question
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Index( )
         {
-           return View(obj.GetAll().Where(x => x.CourseId == Convert.ToInt32(Session["Courseid"])).ToList());
+            var courseid =  Convert.ToInt32(Session["Courseid"]);
+           // ViewBag.coursename=
+            return View(obj.GetAll().Where(x=>x.CourseId==courseid).ToList());//.Where(x => x.CourseId == courseid).ToList());
         }
         [HttpPost]
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Index(Course course)
         {
             var coursedetails = courseobj.GetAll().Where(x => x.Cname == (course.Cname) && x.Clevel == course.Clevel && x.TutorDetail.Id == Convert.ToInt32(Session["TutorId"])).FirstOrDefault();
@@ -36,6 +45,8 @@ namespace E_Learning.Controllers
         }
 
         // GET: Question/Details/5
+        [Authorize(Roles = "Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -63,7 +74,8 @@ namespace E_Learning.Controllers
             }
             return View(a);
         }
-
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         // GET: Question/Create
         public ActionResult Create()
         {
@@ -76,6 +88,8 @@ namespace E_Learning.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Create([Bind(Include = "QuestionSetId,QuestionDescription,Option1,Option2,Option3,Option4,CorrectAnswer,CourseId,Mark,DateCreated,UserModified")] QuestionSet questionSet)
         {
             if (ModelState.IsValid)
@@ -91,6 +105,8 @@ namespace E_Learning.Controllers
         }
 
         // GET: Question/Edit/5
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -111,11 +127,21 @@ namespace E_Learning.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Edit([Bind(Include = "QuestionSetId,QuestionDescription,Option1,Option2,Option3,Option4,CorrectAnswer,TopicId,Mark,DateCreated,UserModified")] QuestionSet questionSet)
         {
             if (ModelState.IsValid)
             {
-                obj.UpdateModel(questionSet);
+                var quesdtls = obj.GetModelById(questionSet.QuestionSetId);
+                quesdtls.QuestionDescription = questionSet.QuestionDescription;
+                quesdtls.Option1 = questionSet.Option1;
+                quesdtls.Option2 = questionSet.Option2;
+                quesdtls.Option3 = questionSet.Option3;
+                quesdtls.Option4 = questionSet.Option4;
+                quesdtls.Mark = questionSet.Mark;
+                quesdtls.CorrectAnswer = questionSet.CorrectAnswer;
+                obj.UpdateModel(quesdtls);
                 obj.Save();
                 return RedirectToAction("Index");
             }
@@ -124,6 +150,8 @@ namespace E_Learning.Controllers
         }
 
         // GET: Question/Delete/5
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -141,11 +169,14 @@ namespace E_Learning.Controllers
         // POST: Question/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Tutor,Admin")]
+        [CustomAuthenticationFilter]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestionSet questionSet = obj.GetModelById(Convert.ToInt32(id)); ;
+            QuestionSet questionSet = obj.GetModelById(Convert.ToInt32(id)); 
             obj.DeleteModel(id);
             obj.Save();
+            //return View();
             return RedirectToAction("Index");
         }
         

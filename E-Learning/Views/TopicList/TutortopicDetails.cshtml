@@ -1,0 +1,148 @@
+﻿@model E_Learning.Models.TopicList
+
+@{
+    ViewBag.Title = "TutorDetails";
+}
+
+<div class=" text-center  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="la la-book"></i>Course Name: @Session["CourseName"]</h2>
+</div>
+<hr />
+
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="form-group  m-0 p-0">
+                        <h3 class="text-center font-weight-bold  text-dark">@Html.DisplayNameFor(model => model.TopicName)</h3>
+                        <label for="">@Html.DisplayFor(model => model.TopicName)</label>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group  m-0 p-0">
+                        <h3 class="text-center font-weight-bold  text-dark"> @Html.DisplayNameFor(model => model.Description)</h3>
+                        <label for=""> @Html.DisplayFor(model => model.Description)</label>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group  m-0 p-0">
+                        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                            <!-- Accordion card -->
+                            <div class="card">
+
+                                <!-- Card header -->
+                                <div class="card-header" role="tab" id="headingOne1">
+                                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                       aria-controls="collapseOne1">
+                                        <h5 class="mb-0">
+                                            Uploaded PDF <i class="fas text-right fa-angle-down rotate-icon"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+
+                                <!-- Card body -->
+                                <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                                     data-parent="#accordionEx">
+                                    <div class="card-body">
+                                        @if (Model.PdfContent != null)
+                                        {
+
+
+                                            //   @{
+
+                                            var base64 = Convert.ToBase64String(Model.PdfContent);
+                                            var imgSrc = String.Format("data:application/pdf;base64,{0}", base64);
+                                            <a href="@imgSrc" class="text-left  text-danger" download="">Download File</a>
+
+
+                                            // }
+
+                                        }
+                                        else
+                                        {
+
+                                            <h3 class="text-left text-danger"> Not Uploaded Yet</h3>
+
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="form-group  m-0 p-0">
+                        <h3 class="text-center font-weight-bold  text-dark">@Html.DisplayNameFor(model => model.VideoPath)</h3>
+                        <div class="container m-0 p-0">
+                            <video width="100%" class="video-fluid z-depth-1 fa " id="movie" style="height: auto;" allowfullscreen="false" controls="false" disablePictureInPicture disableFullScreen controlsList="nodownload">
+                                <source src="@Model.VideoPath" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group  m-0 p-0" >
+                                <h5 for="" class="text-center font-weight-bold  text-dark">
+                                    @Html.DisplayNameFor(model => model.Views)
+                                    <i class="fa fa-eye"></i>
+                                </h5>
+                                <p class="text-center font-weight-bold  text-dark" style="font-size:1.5rem;">
+                                    @if (ViewBag.like != null)
+                                    {
+                                        @ViewBag.like
+                                    }
+                                    else
+                                    {
+
+                                        <h5 class="text-center"> Empty</h5>
+
+                                    }
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col">
+
+                            <div class="form-group  m-0 p-0">
+                                <h5 class="text-center font-weight-bold  text-dark">
+                                    Total Like
+                                    <i class="fa fa-thumbs-up"></i>
+                                </h5>
+                                <p class="text-center font-weight-bold  text-dark" style="font-size:1.5rem;">
+                                    @if (ViewBag.like != null)
+                                    {
+                                        @ViewBag.like
+                                    }
+                                    else
+                                    {
+
+                                        <h5 class="text-center"> Empty</h5>
+
+                                    }
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                            
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>

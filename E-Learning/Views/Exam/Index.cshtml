@@ -1,85 +1,180 @@
 ﻿@model IEnumerable<E_Learning.Models.QuestionSet>
-
+<script src="~/Content/Sweetalaert/sweetalert.js"></script>
 @{
     ViewBag.Title = "Index";
 }
 
 
-@if (Model.Count()!=0 )
+@if (Model.Count() != 0)
 {
-    using (Html.BeginForm())
+    <div class=" text-danger text-center   sticky-top vivify shake"><h3 class="fa fa-clock">Time left = <span id="timer"></span></h3></div>
+    using (Html.BeginForm("Index", "Exam", FormMethod.Post, new { id = "questionform", @class = " md-form mr-auto mb-4" }))
+
     {
         @Html.AntiForgeryToken()
         {
-
-
-
             var a = 0;
-
             foreach (var item in Model)
             {
                 <input name="list.Index" type="hidden" value=@a />
-                <div class="container-xl">
-                    <div class="card">
-                        <div class="card-header bg-danger ">
-                            <table class="table">
-                                <tbody>
-                                    <tr class="row">
-                                        <th class="col-sm-10"><h4>@Html.DisplayFor(modelItem => item.QuestionDescription)</h4></th>
-                                        <th class="col-sm-2"><h4>Marks @Html.DisplayFor(modelItem => item.Mark)</h4></th>
+                <div class="container-xl card">
+                    <div class="card-header border-danger ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h2 class="text-left vivify swoopInLeft"> @Html.DisplayFor(modelItem => item.QuestionDescription)</h2>
+                                </div>
+                                <div class="col-sm">
+                                    <h2 class="text-right vivify popIn"> Marks @Html.DisplayFor(modelItem => item.Mark)</h2>
+                                </div>
 
-                                    </tr>
-                                </tbody>
-
-                            </table>
-
+                            </div>
                         </div>
-                        <div class="card-body">
+
+                    </div>
+
+                    <div class="card-body ">
+                        <div class="form-check">
+                            <label>Question Option</label><br />
+
+                            <label class="form-radio-label ml-3">
+                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".1" )" />
+
+                                <span class="form-radio-sign">@Html.DisplayFor(modelItem => item.Option1)</span>
+                            </label>
+                            <br />
+                            <label class="form-radio-label ml-3">
+                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".2" )" />
+
+                                <span class="form-radio-sign">@Html.DisplayFor(modelItem => item.Option2)</span>
+                            </label>
+                            <br />
+                            <label class="form-radio-label ml-3">
+                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".3" )" />
+
+                                <span class="form-radio-sign">@Html.DisplayFor(modelItem => item.Option3)</span>
+                            </label>
+                            <br />
+                            <label class="form-radio-label ml-3">
+                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".4" )" />
+
+                                <span class="form-radio-sign">@Html.DisplayFor(modelItem => item.Option4)</span>
+                            </label>
+                        </div>
 
 
-                            <div class="form-check card-text">
-                                <label class="form-check-label ">
-                                    <p class=" text-success font-weight-bold ">
-                                        <input type="radio" name="list[@a]" class="form-check-input" required value="@(item.QuestionSetId+".1" )" />
-                                        @Html.DisplayFor(modelItem => item.Option1)
-                                    </p>
-                                </label>
-                            </div>
-                            <div class="form-check card-text">
-                                <label class="form-check-label ">
-                                    <p class=" text-success font-weight-bold ">
-                                        <input type="radio" name="list[@a]" class="form-check-input" required value="@(item.QuestionSetId+".2")" />
-                                        @Html.DisplayFor(modelItem => item.Option2)
-                                    </p>
-                                </label>
-                            </div>
-                            <div class="form-check card-text">
-                                <label class="form-check-label ">
-                                    <p class=" text-success font-weight-bold ">
-                                        <input type="radio" name="list[@a]" class="form-check-input" required value="@(item.QuestionSetId+".3")" />
-                                        @Html.DisplayFor(modelItem => item.Option3)
-                                    </p>
-                                </label>
-                            </div>
-                            <div class="form-check card-text">
-                                <label class="form-check-label ">
-                                    <p class=" text-success font-weight-bold ">
-                                        <input type="radio" name="list[@a]" class="form-check-input" required value="@(item.QuestionSetId+".3")" />
-                                        @Html.DisplayFor(modelItem => item.Option3)
-                                    </p>
-                                </label>
+                    </div>
+
+                </div>
+
+                a += 1;
+            }
+            <div></div>
+
+            <div class="container-fluid ">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-header">
+                               <button type="submit"  value="Create" class="p-2 m-2 btn hvr-sweep-to-right btn-success btn-lg text-center d-flex  justify-content-center d-md-table mx-auto">
+
+                                        <span class=" vivify popInLeft delay-1000">Submit Exam</span>
+                                        <span><i class="la la la-check-circle"></i></span>
+                               </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                a += 1;
-            }
+            </div>
+                                
+
+                                }
+                                }
+                                <script>
 
 
 
-            <input type="submit" value="Submit" />
-        }
-    }
-}
+                                    document.getElementById('timer').innerHTML =
+                                        10+ ":" + 2;
+                                    startTimer();
+
+                                    function startTimer() {
+                                        var presentTime = document.getElementById('timer').innerHTML;
+                                        var timeArray = presentTime.split(/[:]+/);
+                                        var m = timeArray[0];
+                                        var s = checkSecond((timeArray[1] - 1));
+                                        if (s == 59) { m = m - 1 }
+                                        if (m < 0) {
+                                            swal({
+                                                icon: "info",
+                                                text: "Exam End Please Waiting For Result",
+                                                timer: 10000
+                                            }).then(function () {
+                                                $('#questionform').submit();
+                                            });
+                                            //$("#questionform").submit();
+                                        }
+                                        else {
+                                            document.getElementById('timer').innerHTML =
+                                                m + ":" + s;
+                                            console.log(m)
+                                            setTimeout(startTimer, 1000);
+                                        }
+
+                                    }
+
+                                    function checkSecond(sec) {
+                                        if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
+                                        if (sec < 0) { sec = "59" };
+                                        return sec;
+                                    }
 
 
+                                </script>
+                                }
+                                else
+                                {
+                                <script>
+                                    swal({
+                                        icon: "info",
+                                        title: "No Question Found",
+                                        text: "Please Try after some time(Tutor is not upload question)"
+                                    });
+                                </script>
+                                }
+
+
+                                @*<div class="form-check card-text">
+                                        <label class="form-check-label ">
+                                            <p class=" text-success font-weight-bold ">
+                                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".1" )" />
+                                                @Html.DisplayFor(modelItem => item.Option1)
+                                            </p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check card-text">
+                                        <label class="form-check-label ">
+                                            <p class=" text-success font-weight-bold ">
+                                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".2")" />
+                                                @Html.DisplayFor(modelItem => item.Option2)
+                                            </p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check card-text">
+                                        <label class="form-check-label ">
+                                            <p class=" text-success font-weight-bold ">
+                                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".3")" />
+                                                @Html.DisplayFor(modelItem => item.Option3)
+                                            </p>
+                                        </label>
+                                    </div>
+                                    <div class="form-check card-text">
+                                        <label class="form-check-label ">
+                                            <p class=" text-success font-weight-bold ">
+                                                <input type="radio" name="list[@a]" class="form-check-input vivify flipInX" required value="@(item.QuestionSetId+".3")" />
+                                                @Html.DisplayFor(modelItem => item.Option3)
+                                            </p>
+                                        </label>
+                                    </div>*@

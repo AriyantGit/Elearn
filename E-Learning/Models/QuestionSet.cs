@@ -22,6 +22,7 @@ namespace E_Learning.Models
         [Required]
         public string Option4 { get; set; }
         [Required]
+        [Range(1,4, ErrorMessage = "Please select Correct Option")]
         public int CorrectAnswer { get; set; }
         [ForeignKey("Course")]
         public int CourseId { get; set; }

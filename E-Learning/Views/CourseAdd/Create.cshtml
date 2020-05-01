@@ -4,65 +4,115 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class=" text-center  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2 class="text-center text-capitalize text-dark vivify unfold"><i class="fa fa-book"></i>Create New Course</h2>
+</div>
+<hr />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="container-fluid ">
 
-    <div class="form-horizontal">
-        <h4>Course</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Clevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Clevel, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Clevel, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class=" ">
 
-        <div class="form-group">
-            @Html.Label("Paid", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.Version, new { @checked = "checked" })
-                    @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <h3 class="m-0 p-0">
+                                    @Html.LabelFor(model => model.Cname, htmlAttributes: new { @class = "form-text  fw-mediumbold" })
+
+                                </h3>
+
+
+
+                                <div class="">
+                                    @Html.EditorFor(model => model.Cname, new { htmlAttributes = new { @class = "form-control shadow" } })
+                                    @Html.ValidationMessageFor(model => model.Cname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h3 class="m-0 p-0">
+                                    @Html.LabelFor(model => model.Clevel, htmlAttributes: new { @class = " fw-mediumbold" })
+
+                                </h3>
+
+
+
+                                <div class="">
+                                    @Html.EnumDropDownListFor(model => model.Clevel, htmlAttributes: new { @class = "form-control shadow" })
+                                    @Html.ValidationMessageFor(model => model.Clevel, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group d-inline">
+
+                                <h3 class="m-0 p-0">
+
+                                    @Html.Label("Free Or Paid", htmlAttributes: new { @class = " fw-mediumbold" })
+                                    <span style="color:red;font-size:19px"> *</span>
+                                    <label class="form-check-label">
+                                        @Html.CheckBoxFor(model => model.Version, new { @checked = "checked", @class = "form-check-input" })
+                                        <span class="form-check-sign " typeof="checkbox" id="Version">Paid </span>
+                                        @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+                                    </label>
+                                </h3>
+
+                            </div>
+
+
+                            <div class="form-group" id="FeeDiv">
+                                <div class="">
+                                    @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control shadow" } })
+                                    @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 ">
+
+                                    <button type="submit" value="Create" class="btn btn-success btn-lg text-center d-flex fa fa-edit justify-content-center d-md-table mx-auto" id="btnsubmit" data-toggle="modal">
+
+                                        <span class=" vivify popInLeft delay-1000">Add New Topic</span>
+                                    </button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-
-        <div class="form-group" id="FeeDiv">
-            @Html.LabelFor(model => model.Fee, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+               
 
-@section Scripts {
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/CustomeJS/CoursePaid.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+
+                    @section Scripts {
+                        <script src="~/Scripts/jquery-3.4.1.js"></script>
+                        <script src="~/Scripts/jquery.validate.min.js"></script>
+                        <script src="~/Scripts/CustomeJS/CoursePaid.js"></script>
+                        <script src="~/Content/toastr/toastr.min.js"></script>
+                        <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+
+                        <script>
+                            $(document).ready(function () {
+
+
+                            });
+                            $(function () {
+                                // delete extra hidden fields created by checkboxes as the grid links mess this up by doubling the querystring parameters
+                                $("input[type='hidden'][name='Version']").remove();
+                            });
+                        </script>
+
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }

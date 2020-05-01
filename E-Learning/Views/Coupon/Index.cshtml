@@ -1,0 +1,152 @@
+﻿@model IEnumerable<E_Learning.Models.Coupon>
+@{
+
+}
+
+<div class=" text-center text-capitalize  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2><i class="fa fa-ticket-alt"></i> All Coupon Details</h2>
+</div>
+<hr />
+@using (Html.BeginForm("create", "coupon", FormMethod.Get))
+{
+    Html.AntiForgeryToken();
+
+    <div class="col-md-offset-2 col-md-12 mb-4">
+        <div class="d-flex justify-content-center row-cols-lg-4 vivify popIn">
+            <Button type="submit" class="btn-lg  btn-block btn-primary text-center" id="btnsubmit" >
+                Add New Coupon     &nbsp;<i id="isrch" class="fa fa-ticket-alt vivify"></i>
+            </Button>
+        </div>
+    </div>
+
+
+}
+
+
+<table class="table text-center " id="myTable">
+    <thead>
+        <tr class="alert-info text-dark font-weight-bold">
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Validity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Action
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Validity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                <td>
+                    @{
+                        int c = DateTime.Compare(DateTime.Today, item.Validity);
+                        if (c > 0)
+                        {
+                            <p>Not Active</p>
+                        }
+
+                        else
+                        {
+                            <p>
+                                Active
+                            </p>
+                        }
+
+
+
+                    }
+                </td>
+
+                <td>
+                    @using (Html.BeginForm("delete", "coupon", FormMethod.Get,new { id = item.Code }))
+                    {
+                        <input type="hidden" name="id" value="@item.Id" />
+                        @*<input type="submit" value="Details" class="btn btn-danger btn-block badge-warning fa fa-dev" />*@
+                        <button  id="@item.Id" class="btn btn-danger btn-block " value=@item.Id >Delete<i class="fa fa-trash"></i></button>
+                        <script>
+                             $("#@item.Id").click(function (e) {
+                                 e.preventDefault();
+                                 
+                                 var formid = $(this).attr('value');
+                                 event.preventDefault(); // prevent form submit
+                                  var form = document.forms[$(this).attr('value')]; // storing the form
+                                  // event.preventDefault(); // prevent form submit
+                                  //var form = document.forms["myForm"]; // storing the form
+                                  swal({
+                                         title: "Are you sure?",
+                                         text: "Once deleted, you will not be able to recover this ",
+                                         icon: "warning",
+                                         buttons: true,
+                                         dangerMode: true,
+                                       })
+                                      .then((willDelete) => {
+                                           if (willDelete) {
+                                                 form.submit();
+                                           } else {
+                                                  swal("Your imaginary file is safe!");
+                                       }
+                                    });
+
+            });
+                        </script>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+
+    <link href="~/Content/Datatable/dataTables.bootsrap4.min.css" rel="stylesheet" />
+
+    <script src="~/Content/Datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Datatable/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           
+
+
+            $('#myTable').DataTable();
+            //var table = $('#myTable').DataTable({
+            //    responsive: true,
+            //     buttons: true
+            //});
+
+            //new $.fn.dataTable.Buttons( table, {
+            //    buttons: [
+            //        'copy', 'excel', 'pdf'
+            //    ]
+            //} );
+
+            //table.buttons().container()
+            //    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+        });
+    </script>
+}
+

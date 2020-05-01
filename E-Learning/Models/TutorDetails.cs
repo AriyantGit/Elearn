@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,12 @@ namespace E_Learning.Models
         //[Required]
         public byte[] Imageurl { get; set; }
         public ICollection<Course> courses { get; set; }
+        [DefaultValue("No")]
+        public string Disable { get; set; }
+        
+        [DefaultValue("Tutor")]
+        public string Role { get; set; }
 
+        
     }
 }

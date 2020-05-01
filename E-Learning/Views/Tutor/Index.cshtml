@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="container">
+<div class="">
     <table class="table">
         <tr>
             <th>
@@ -46,7 +46,21 @@
                     @Html.DisplayFor(modelItem => item.PhoneNo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Imageurl)
+                    @{
+                        if (item.Imageurl != null)
+                        {
+                            var base64 = Convert.ToBase64String(item.Imageurl);
+                            var imgsrc = string.Format("data:image/jpeg;base64,{0}", base64);
+                            <img src='@imgsrc' height=100 width=150 class="img-thumbnail" id="showimg" name="showimg" alt="Responsive image" />
+                        }
+                        else
+                        {
+                            <img src="~/Image/img_avatar3.png" height=100 width=150 class="img-fluid" id="showimg" name="showimg" alt="Responsive image" />
+                        }
+
+
+                    }
+
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

@@ -82,5 +82,10 @@ namespace E_Learning.Models
         public System.Data.Entity.DbSet<E_Learning.Models.QuestionSet> QuestionSets { get; set; }
 
         public System.Data.Entity.DbSet<E_Learning.Models.AnswerDetails> AnswerDetails { get; set; }
+
+        public System.Data.Entity.DbSet<E_Learning.Models.CartDetail> CartDetails { get; set; }
+
+        public System.Data.Entity.DbSet<E_Learning.Models.Coupon> Coupons { get; set; }
+        public System.Data.Entity.DbSet<E_Learning.Models.ExamCheck> ExamChecks { get; set; }
     }
 }

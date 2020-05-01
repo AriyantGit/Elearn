@@ -3,54 +3,79 @@
 @{
     ViewBag.Title = "CourseDetails";
 }
+<div class=" text-center text-capitalize  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2><i class="fa fa-edit"></i> Course Details</h2>
+</div>
 
-<h2>CourseDetails</h2>
-@{
-    
-}
-<table class="table ">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Cname)
-        </th>
-        <th>
-            <label>Student Name</label>
-        </th>
+<hr />
 
-        <th></th>
-    </tr>
+<div class="container-fluid " >
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Cname)
-            </td>
-            <td>
-                <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target=@("#" + @Html.DisplayFor(modelItem => item.Student.FName)) aria-expanded="false" aria-controls="collapseExample">
-                    @Html.DisplayFor(modelItem => item.Student.FName) &nbsp  @Html.DisplayFor(modelItem => item.Student.LName)
-                </button>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentCourseRegistrationId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StudentCourseRegistrationId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StudentCourseRegistrationId })
-            </td>
-        </tr>
-        <tr>
-            <td colspan="6">
-                <div class="collapse " id=@Html.DisplayFor(modelItem => item.Student.FName)>
-                    <div class="card card-body bg-warning">
-                        @Html.DisplayFor(modelItem => item.Student.FName)
-                        @Html.DisplayFor(modelItem => item.Student.LName)
-                        @Html.DisplayFor(modelItem => item.Student.Mobile)
-                        @Html.DisplayFor(modelItem => item.Student.Email)
-                        @Html.DisplayFor(modelItem => item.Student.StudentId)
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-capitalize bg-light text-center">
+                    <div class="card-title text-center "><h3>All Student </h3></div>
                 </div>
-            </td>
-        </tr>
+                <div class="card-body">
+                    <table class="text-center table fw-bold   vivify driveInBottom">
+                        <tr class="text-center   font-weight-bold">
+                            <th>
+                                @Html.DisplayNameFor(model => model.Course.Cname)
+                            </th>
+                            <th>
+                                <label>Student Name</label>
+                            </th>
 
-    }
 
-</table>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr class="font-weight-bold">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Course.Cname)
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target=@("#" + @Html.DisplayFor(modelItem => item.Student.FName)) aria-expanded="false" aria-controls="collapseExample">
+                                        @Html.DisplayFor(modelItem => item.Student.FName) &nbsp  @Html.DisplayFor(modelItem => item.Student.LName)
+                                    </button>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="collapse " id=@Html.DisplayFor(modelItem => item.Student.FName)>
+                                        <div class="card card-body bg-warning">
+                                            <div class="container text-center ">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                       Student Name: @Html.DisplayFor(modelItem => item.Student.FName) &nbsp;@Html.DisplayFor(modelItem => item.Student.LName)
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        Student Mobile: @Html.DisplayFor(modelItem => item.Student.Mobile)
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        Student Email: @Html.DisplayFor(modelItem => item.Student.Email)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                

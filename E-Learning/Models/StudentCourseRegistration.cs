@@ -25,7 +25,10 @@ namespace E_Learning.Models
         public int? TopicListId { get; set; }
         public virtual TopicList TopicList { get; set; }
 
+        [ForeignKey("Coupon")]
 
+        public int? CouponId { get; set; }
+        public virtual Coupon Coupon { get; set; }
 
     }
 }

@@ -1,0 +1,152 @@
+﻿@model E_Learning.Models.Coupon
+
+@if(ViewBag.coupon!=null)
+{
+    <script>
+        swal({
+                            title: 'Coupon Code Name Not Avaiable',
+                            text: 'Coupon name already exits please give differnt name',
+                            icon: 'error',
+                            timer: 10000,
+                            buttons: false,
+                        });
+                        $("#Code").val('');
+    </script>
+}
+
+
+<div class=" text-center text-capitalize  bg-warning m-0 p-3 vivify unfold " style="border-radius:1.5rem;">
+    <h2><i class="fa fa-ticket-alt"></i> Add Coupon Details</h2>
+</div>
+<hr />
+            @using (Html.BeginForm())
+{
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <div class="form-group row">
+                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">
+                    @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label " })
+                </label>
+                <div class="col-sm-10">
+                    <div class="input-group mb-3">
+                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control shadow" } })
+
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-info shadow" id="couponchk" type="button">Check Coupon</button>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="form-group row">
+                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">
+                    @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label " })
+                </label>
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control shadow", @title = "Percentage(%) of Discount max(100),min(1)" } })
+                    @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label col-form-label-lg">
+                    @Html.LabelFor(model => model.Validity, htmlAttributes: new { @class = "control-label" })
+                </label>
+                <div class="col-sm-10">
+                    @Html.EditorFor(model => model.Validity, new { htmlAttributes = new { @class = "shadow form-control datepicker ", @title = "no of days" } })
+                    @Html.ValidationMessageFor(model => model.Validity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-12">
+            <div class="d-flex justify-content-center row-cols-lg-4 vivify popIn"><button type="submit" class="btn btn- btn-block btn-primary text-center" id="btnsubmit" style="font-size:2rem;">Add Coupon     &nbsp;<i id="isrch" class="fa fa-ticket-alt vivify"></i></button></div>
+
+            @*<input type="submit" value="Search" class="btn btn-success " id="btnGet" /><i class="text-dark fa fa-search"></i>*@
+        </div>
+    
+
+
+        
+    </div>
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+@section Scripts
+{
+    <script src="~/Content/Sweetalaert/sweetalert.js"></script>
+    
+    <script src="~/Scripts/DatePicker.js"></script>
+
+    <link href="~/Content/DatePicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script>
+        $(".datepicker").datepicker({
+            autoHide: true,
+            autoPick: true,
+            format: 'yyyy-mm-dd',
+            startDate: new Date().getDate(),
+            minDate: 0,
+            inline: true
+
+        });
+        $("#couponchk").click(function (e) {
+            if ($("#Code").val() != '') {
+                $.ajax({
+                    type: "POST",
+                    url: "/Coupon/CouponValid/",
+                    data: {
+                        couponcode: $("#Code").val()
+
+                    },
+                    success: function (result) {
+                        if (result.msg == "available") {
+
+                            toastr.success("Successfully Added Coupon");
+                        } else {
+                            swal({
+                                title: 'Coupon Code Name Not Avaiable',
+                                text: 'Coupon name already exits please give differnt name',
+                                icon: 'error',
+                                timer: 10000,
+                                buttons: false,
+                            });
+                            $("#Code").val('');
+                        }
+
+                    },
+                    error: function (result) {
+                        alert('error');
+                    }
+                });
+            }
+            else {
+                    swal({
+                            title: 'Coupon Code Empty',
+                            text: 'Please Give Some Name',
+                            icon: 'error',
+                            timer: 10000,
+                            buttons: false,
+                        });
+                        $("#Code").val('');
+            }
+            //e.preventDefault();
+           
+        });
+
+
+
+    </script>
+
+    <script src="~/Scripts/requiredAsterik.js"></script>
+}
